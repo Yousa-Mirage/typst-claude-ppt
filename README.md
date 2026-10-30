@@ -12,7 +12,7 @@
 just demo       # 生成 16:9 PDF，并用 macOS 默认应用打开
 ```
 
-PDF 保存为 `build/showcase.pdf`。
+PDF 保存为 `examples/showcase.pdf`。
 
 示例统一放在 [`examples/showcase.typ`](examples/showcase.typ)，包含卡片、列表、引用、表格、公式、代码、对话和 Artifact。
 

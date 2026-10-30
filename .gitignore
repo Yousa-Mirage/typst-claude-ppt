@@ -1,4 +1,4 @@
-/build/
+/examples/*.pdf
 /.packages/
 __pycache__/
 .DS_Store
