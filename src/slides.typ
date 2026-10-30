@@ -71,13 +71,17 @@
     .rev()
     .find(it => it.location().page() <= current)
   if latest != none and latest.level == 2 {
-    header-label[
-      #numbered-title(latest)
-      #if latest.location().page() < current {
-        let continuation = current - latest.location().page() + 1
-        text(font: fonts.sans, size: 14pt, fill: colors.faint, h(0.6em) + "(" + str(continuation) + ")")
-      }
-    ]
+    if latest.location().page() < current {
+      let continuation = current - latest.location().page() + 1
+      header-label(grid(
+        columns: (1fr, auto),
+        column-gutter: 14pt,
+        align: (left + top, right + top),
+        numbered-title(latest), text(font: fonts.serif, size: 14pt, fill: colors.faint, numbering("(I)", continuation)),
+      ))
+    } else {
+      header-label(numbered-title(latest))
+    }
   }
 }
 
