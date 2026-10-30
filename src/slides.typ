@@ -67,7 +67,7 @@
 }
 
 #let cover(title, subtitle, authors, date) = {
-  set page(header: none, margin: (x: medium.space / 2, top: 0.7cm, bottom: 0.9cm))
+  set page(header: none, footer: none, margin: (x: medium.space / 2, top: 0.7cm, bottom: 0.9cm))
   block(height: 100%, width: 100%, breakable: false)[
     #v(1fr)
     #line(length: 22pt, stroke: 2pt + colors.accent)
