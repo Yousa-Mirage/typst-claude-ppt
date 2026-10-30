@@ -93,27 +93,16 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 
 ## 在 Quarto 中使用
 
-Quarto 1.10 及以上已支持 Typst 格式渲染。首先确保安装了 `typst`、`quarto`、`typship` 和所需字体，并按前文使用 `typship download` 安装 Typst 包。扩展直接调用 `@local/typst-claude-ppt:0.1.0`，与原生 Typst 文稿共用同一套样式。
-
-仓库中包含 [Quarto 示例代码](examples/quarto.qmd)，可通过运行：
+Quarto 1.10 及以上已支持 Typst 格式渲染，因此也可以使用该模板。首先安装 `typst`、`quarto`、`typship` 和前文列出的字体。在自己的 Quarto 项目根目录中依次运行以下命令，安装 Typst 模板包和 Quarto 扩展：
 
 ```sh
-quarto render examples/quarto.qmd
+typship download https://github.com/Yousa-Mirage/typst-claude-ppt
+quarto add Yousa-Mirage/typst-claude-ppt
 ```
 
-生成文件 [`examples/quarto.pdf`](examples/quarto.pdf)。
+第一条命令将 Typst 包安装到本机的 `@local/typst-claude-ppt:0.1.0`；第二条命令将 Quarto 扩展安装到**当前项目**的 `_extensions/` 路径下。安装完成后，在项目中的 Quarto 文稿中使用 `format: claude-ppt-typst` 即可使用本模板。
 
-在其他项目中使用时，从 `quarto` 书签检出后，将本仓库的 `_extensions/claude-ppt` 目录复制到项目的 `_extensions/claude-ppt` 下。扩展不会自动安装 Typst 包。
-
-将 `quarto` 书签推送到 GitHub 后，也可以在自己的 Quarto 项目目录中安装扩展：
-
-```sh
-quarto add Yousa-Mirage/typst-claude-ppt@quarto
-```
-
-保存下面的示例为 `slides.qmd`，运行 `quarto render slides.qmd` 即可生成同目录下的 `slides.pdf`。
-
-最小文稿示例：
+以下为一个简单示例 `slides.qmd`：
 
 ```markdown
 ---
@@ -130,40 +119,49 @@ format: claude-ppt-typst
 
 用 Markdown 撰写正文。
 
-{{< pagebreak >}}
+## 第二页
 
-同一主题的续页。
+- 要点 1
+  - 要点 2
+
+其他正文
 ```
 
-- `title`、`subtitle`、`date` 对应模板元数据；Quarto 的 `author` 自动转换为模板的作者列表，也支持多个作者及 `name` 字段。
-- `#` 开始章节页，`##` 开始内容页，`###` 及以下为页内标题。编号、目录和续页标记沿用 Typst 模板的规则。全文只有 `##` 时按 `1`、`2` 编号，不生成目录。
+在项目根目录运行：
+
+```sh
+quarto render slides.qmd
+```
+
+生成的 PDF 为同目录下的 `slides.pdf`。完整写法可参考 [Quarto 示例代码](examples/quarto.qmd) 和 [示例 PDF](examples/quarto.pdf)。
+
+- `title`、`subtitle`、`date` 对应模板元数据。
+- `#` 开始章节页，`##` 开始内容页。编号、目录和续页标记沿用 Typst 模板的规则。
 - 默认 `ratio: 16/9`、`toc: true`、`footer: true`。可以在格式配置中覆盖：
-
-```yaml
-format:
-  claude-ppt-typst:
-    ratio: 4/3
-    toc: false
-    footer: false
-```
-
-代码块使用 Typst 原生高亮。公式、图片和表格使用 Quarto 的常规写法；原生参考文献处理会将参考文献放在单独的内容页，可用 `reference-section-title` 修改标题。示例文稿展示了 `bibliography` 与 `[@typst-docs]` 引用的写法。
+  ```yaml
+  format:
+    claude-ppt-typst:
+      ratio: 4/3
+      toc: false
+      footer: false
+  ```
+- 原生参考文献处理会将参考文献放在单独的内容页，可用 `reference-section-title` 修改标题。示例文稿展示了 `bibliography` 与 `[@typst-docs]` 引用的写法。
 
 ### Markdown 组件
 
-使用带 class 的 fenced Div 调用模板组件，内部仍可写列表、代码、公式、链接和引用。
-
-提示框使用 `.callout`，默认没有标题：
+提示框使用 `.callout`，卡片使用 `.card`：
 
 ```markdown
 ::: {.callout}
 需要强调的结论。
 :::
+
+::: {.card}
+用 **Markdown** 表达正文。
+:::
 ```
 
-也支持 Quarto 的 `.callout-note`、`.callout-tip`、`.callout-warning`、`.callout-important` 和 `.callout-caution`。它们统一使用模板的橙色提示框样式，不自动添加类型名称。PDF 中始终展开，不采用网页中的图标、折叠或外观选项。
-
-卡片使用 `.card`。提示框和卡片都可通过 `title` 属性或内部的第一个标题设置组件标题；两者同时出现时，`title` 属性优先。组件标题不会参与幻灯片分页、编号或目录：
+提示框和卡片都可通过 `title` 属性或内部的第一个标题设置组件标题。
 
 ```markdown
 ::: {.callout-note}
@@ -174,11 +172,11 @@ format:
 :::
 
 ::: {.card title="研究结论"}
-用 **Markdown** 表达正文。
+Quarto + Typst = 💖
 :::
 ```
 
-双栏使用 `.columns`，其中放置两个 `.column`。两栏等宽、顶部对齐，栏中可以继续嵌套提示框或卡片。省略 `width` 即可，也接受 `width="50%"`；其他比例和多于两栏的布局不在此组件的支持范围内。
+双栏使用 `.columns`，其中放置两个 `.column`。栏中可以继续嵌套提示框或卡片。
 
 ```markdown
 ::::: {.columns}
@@ -195,16 +193,6 @@ format:
 ::::
 :::::
 ```
-
-嵌套 Div 时，外层使用更多冒号。提示框和卡片沿用 Typst 组件的完整面板布局，单个面板必须能放进一张内容页；内容太长时请拆为多页。
-
-需要直接调用 Typst 时，仍可在原生块中通过 `claude` 命名空间访问组件：
-
-````markdown
-```{=typst}
-#claude.callout[需要强调的结论。]
-```
-````
 
 ## 致谢
 
