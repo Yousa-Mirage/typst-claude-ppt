@@ -1,6 +1,6 @@
 ---
 title: "用 Quarto 撰写学术幻灯片"
-subtitle: "Markdown 内容，Typst 排版"
+subtitle: "Markdown 内容，Typst 排版，Claude 风格"
 author:
   - name: "Yousa Mirage"
   - name: "天然純真"
