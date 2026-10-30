@@ -1,7 +1,7 @@
 /.packages/
 __pycache__/
 .DS_Store
-.quarto/
+/.quarto/
 /examples/quarto.pdf
 /examples/quarto.typ
 /examples/quarto_files/

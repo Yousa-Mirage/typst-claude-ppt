@@ -10,6 +10,9 @@ contributes:
       ratio: 16/9
       shift-heading-level-by: 0
       syntax-highlighting: idiomatic
+      filters:
+        - path: components.lua
+          at: pre-ast
       template-partials:
         - typst-template.typ
         - typst-show.typ
