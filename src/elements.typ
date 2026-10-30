@@ -2,10 +2,12 @@
 
 #let elements(body) = {
   set raw(theme: "../assets/claude.tmTheme")
-  set list(indent: 0.15em, body-indent: 0.65em, spacing: 0.6em, marker: (
-    text(fill: colors.accent)[•],
-    text(fill: colors.muted)[–],
-  ))
+  set list(
+    indent: 0.15em,
+    body-indent: 0.65em,
+    spacing: 0.6em,
+    marker: depth => text(fill: colors.accent, if depth == 0 { [•] } else { [◦] }),
+  )
   set enum(indent: 0pt, body-indent: 0.65em, spacing: 0.6em)
   set terms(spacing: 0.65em)
 
