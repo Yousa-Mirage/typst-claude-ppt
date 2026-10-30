@@ -2,7 +2,6 @@
 __pycache__/
 .DS_Store
 /.quarto/
-/examples/quarto.pdf
 /examples/quarto.typ
 /examples/quarto_files/
 **/*.quarto_ipynb

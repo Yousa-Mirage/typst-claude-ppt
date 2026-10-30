@@ -34,7 +34,7 @@ local function panel(div, name)
 
   local blocks = pandoc.Blocks({})
   if title and #title > 0 then
-    local inlines = pandoc.Inlines({pandoc.RawInline("typst", "#claude." .. name .. "(title: [")})
+    local inlines = pandoc.Inlines({ pandoc.RawInline("typst", "#claude." .. name .. "(title: [") })
     inlines:extend(title)
     inlines:insert(pandoc.RawInline("typst", "])["))
     blocks:insert(pandoc.Plain(inlines))
@@ -50,10 +50,10 @@ end
 local function columns(div)
   local cols = div.content
   assert(#cols == 2 and cols[1].t == "Div" and cols[2].t == "Div"
-      and cols[1].classes:includes("column")
-      and cols[2].classes:includes("column"),
+    and cols[1].classes:includes("column")
+    and cols[2].classes:includes("column"),
     "Claude PPT: .columns requires exactly two direct .column Divs")
-  local blocks = pandoc.Blocks({raw("#claude.two-columns([")})
+  local blocks = pandoc.Blocks({ raw("#claude.two-columns([") })
   for i, col in ipairs(cols) do
     local width = col.attributes.width
     assert(not width or width == "50%",
@@ -64,7 +64,7 @@ local function columns(div)
   return pandoc.Div(blocks, pandoc.Attr(div.identifier))
 end
 
-return {{
+return { {
   Div = function(div)
     for _, class in ipairs(div.classes) do
       if callouts[class] then
@@ -76,4 +76,4 @@ return {{
       end
     end
   end,
-}}
+} }
