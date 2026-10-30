@@ -6,6 +6,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,11 +20,21 @@ def run(*args):
     return result.stdout
 
 
+def check_bounds(pdf):
+    tree = ET.fromstring(run("pdftotext", "-bbox", str(pdf), "-"))
+    for page in tree.iter("{http://www.w3.org/1999/xhtml}page"):
+        width, height = float(page.attrib["width"]), float(page.attrib["height"])
+        for word in page.iter("{http://www.w3.org/1999/xhtml}word"):
+            box = {key: float(value) for key, value in word.attrib.items()}
+            assert box["xMin"] >= -0.5 and box["yMin"] >= -0.5, (pdf.name, word.text, box)
+            assert box["xMax"] <= width + 0.5 and box["yMax"] <= height + 0.5, (pdf.name, word.text, box)
+
+
 def compile_case(name, options, body, *, pages=None, error=None):
     source = BUILD / f"{name}.typ"
     pdf = source.with_suffix(".pdf")
     source.write_text(
-        '#import "/src/lib.typ": slides\n'
+        '#import "/src/lib.typ": slides, card, callout, two-columns, badge, message, artifact\n'
         f"#show: slides.with({options})\n{body}\n", encoding="utf-8"
     )
     command = ["typst", "compile", "--root", str(ROOT), str(source), str(pdf)]
@@ -32,6 +43,7 @@ def compile_case(name, options, body, *, pages=None, error=None):
         assert result.returncode and error in result.stderr, (name, result.stderr)
         return
     run(*command)
+    check_bounds(pdf)
     info = run("pdfinfo", str(pdf))
     count = int(re.search(r"Pages:\s+(\d+)", info).group(1))
     if pages is not None:
@@ -59,6 +71,7 @@ def check_package():
         main = consumer / "main.typ"
         pdf = consumer / "main.pdf"
         run("typst", "compile", "--package-path", str(packages), str(main), str(pdf))
+        check_bounds(pdf)
         assert re.search(r"Pages:\s+6", run("pdfinfo", str(pdf)))
         (consumer / "sample.svg").write_text(
             '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80">'
@@ -112,6 +125,22 @@ def main():
     compile_case("missing-title", "", "", error="title must be non-empty")
     compile_case("bad-authors", 'title: "文稿", authors: (1,)', "", error="authors must contain only strings")
     compile_case("removed-option", 'title: "文稿", layout: "medium"', "", error="unexpected argument")
+    compile_case("two-line-title", 'title: "文稿", ratio: 4/3',
+                 "== 这是一段比较长的幻灯片标题，用于检查四比三比例的自动换行\n正文。", pages=3)
+    compile_case("oversize-title", 'title: "文稿", ratio: 4/3',
+                 "== " + "标题" * 50 + "\n正文。", error="slide title exceeds two lines")
+    compile_case("oversize-panel", 'title: "文稿"',
+                 "== 内容\n#card[#lorem(500)]", error="panel is taller than a slide")
+    compile_case("bad-role", 'title: "文稿"',
+                 '== 内容\n#message(role: "system")[正文]', error="message role must be user or assistant")
+    compile_case("long-code", 'title: "文稿", ratio: 4/3',
+                 '== 代码\n```python\nvalue = "' + "long-code-" * 24 + '"\n```')
+    for name, inputs in (("showcase", ()), ("showcase-4x3", ("--input", "ratio=4:3"))):
+        pdf = BUILD / f"{name}.pdf"
+        run("typst", "compile", "--root", str(ROOT), *inputs,
+            str(ROOT / "examples" / "showcase.typ"), str(pdf))
+        check_bounds(pdf)
+        assert re.search(r"Pages:\s+10", run("pdfinfo", str(pdf)))
     print("PASS: pagination, ratios, TOC, footers, metadata, continuation and invalid arguments")
     check_package()
 
