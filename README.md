@@ -148,10 +148,10 @@ typst watch my-talk/main.typ my-talk.pdf
 | --- | --- |
 | 正文、标题 | `Anthropic Serif Web Text` → `Source Han Serif SC` |
 | 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Serif SC` |
-| 代码 | `Anthropic Mono Web` → `Source Han Serif SC` |
+| 代码 | `Anthropic Mono` → `Source Han Serif SC` |
 | 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
-字体不随包分发。当前 Anthropic 系统字体只有 Regular 实例，粗体/斜体的效果由编译器及实际字体决定。中文代码回退至宋体，不能用字符数量假定中西文等宽。
+字体不随包分发。粗体/斜体的效果由编译器及实际安装的字体决定。中文代码回退至宋体，不能用字符数量假定中西文等宽。
 
 内容标题最多两行，过长会明确报错；建议将解释性文字放入正文。卡片和提示区是完整面板，过高会提示拆页。普通正文与长表格可自然续页，复杂内容仍建议检查逐页预览。
 

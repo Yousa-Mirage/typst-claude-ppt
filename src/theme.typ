@@ -14,7 +14,7 @@
 #let fonts = (
   serif: ((name: "Anthropic Serif Web Text", covers: "latin-in-cjk"), "Source Han Serif SC"),
   sans: ((name: "Anthropic Sans Web Text", covers: "latin-in-cjk"), "Source Han Serif SC"),
-  mono: ((name: "Anthropic Mono Web", covers: "latin-in-cjk"), "Source Han Serif SC"),
+  mono: ((name: "Anthropic Mono", covers: "latin-in-cjk"), "Source Han Serif SC"),
 )
 
 #let medium = (height: 10.5cm, space: 1.6cm, body: 12pt)
