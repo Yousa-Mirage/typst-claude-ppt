@@ -116,3 +116,5 @@ def describe(idea):
 result = describe("Make ideas visible")
 print(result)
 ```
+
+非常 nice 的 PPT 模板！
