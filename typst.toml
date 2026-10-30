@@ -10,7 +10,7 @@ keywords = [
   "claude",
 ]
 categories = ["presentation"]
-exclude = [".packages", "_dev", "examples", "justfile"]
+exclude = [".packages", "_dev", "_extensions", "_quarto.yml", ".quarto", "examples", "justfile"]
 
 [template]
 path = "template"
