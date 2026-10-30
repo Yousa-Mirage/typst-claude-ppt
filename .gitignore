@@ -6,3 +6,5 @@ __pycache__/
 /examples/quarto.typ
 /examples/quarto_files/
 **/*.quarto_ipynb
+
+/.luarc.json

@@ -205,6 +205,8 @@
   }
   show heading.where(level: 3): set text(size: 14pt)
   show heading.where(level: 4): set text(size: 12pt)
+  // Bibliographies use content-slide headings and never advance heading numbers.
+  show bibliography: set heading(offset: 1, numbering: none, outlined: false)
 
   cover(title, subtitle, authors, displayed-date)
   pagebreak(weak: true)
