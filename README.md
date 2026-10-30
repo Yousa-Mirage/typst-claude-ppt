@@ -71,8 +71,8 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | 写法 | 用途 |
 | --- | --- |
 | `#card(title: [标题])[内容]` | 带细边框的卡片，标题可省略 |
-| `#callout(title: [提示])[内容]` | 带橙色侧线的提示区 |
-| `#two-columns([左侧], [右侧])` | 等宽双栏，可在两栏中放卡片或图片 |
+| `#callout(title: none)[内容]` | 带橙色侧线的提示区，可添加标题 |
+| `#two-columns([左侧], [右侧])` | 等宽双栏，可放卡片或图片 |
 
 ## 使用字体
 

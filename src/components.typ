@@ -17,7 +17,7 @@
   #body
 ]
 
-#let callout(body, title: [提示]) = panel(
+#let callout(body, title: none) = panel(
   fill: colors.surface,
   stroke: (left: 2pt + colors.accent),
   radius: 3pt,
