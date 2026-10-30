@@ -29,24 +29,3 @@
   columns: (1fr, 1fr), column-gutter: 14pt, align: top,
   left, right,
 )
-
-#let message(body, role: "user") = {
-  assert(role in ("user", "assistant"), message: "message role must be user or assistant")
-  if role == "user" {
-    align(right, block(width: 88%)[
-      #panel(fill: colors.surface, stroke: none)[#set align(left); #body]
-    ])
-  } else {
-    block(width: 100%)[
-      #block(below: 5pt)[#text(font: fonts.sans, size: 9pt, fill: colors.muted)[Claude]]
-      #body
-    ]
-  }
-}
-
-#let artifact(body, title: [Artifact]) = panel(inset: 0pt)[
-  #block(width: 100%, fill: colors.surface, inset: (x: 12pt, y: 8pt), radius: (top: 7pt))[
-    #text(font: fonts.sans, size: 9pt, fill: colors.muted, title)
-  ]
-  #block(inset: 12pt, width: 100%)[#body]
-]

@@ -17,7 +17,7 @@ PDF 保存为 `examples/showcase.pdf`。
 
 自动化和代理执行时使用 `just demo --no-preview`，避免自动打开 PDF 查看器。
 
-示例统一放在 [`examples/showcase.typ`](examples/showcase.typ)，包含卡片、列表、引用、表格、公式、代码、对话和 Artifact。
+示例统一放在 [`examples/showcase.typ`](examples/showcase.typ)，包含卡片、列表、引用、表格、公式和代码。
 
 ## 在自己的文稿中使用
 
@@ -104,7 +104,7 @@ typst watch my-talk/main.typ my-talk.pdf
 | `footer` | `true` | 控制封面之后的左侧页脚及右侧页码 |
 | `toc` | `true` | 是否生成目录 |
 
-固定使用 Claude 浅色主题和 medium 画布：高 10.5cm，宽由比例决定。正文 12pt，内容标题 19pt。字体、颜色、布局档位、计数器类型和封面开关不作为模板配置。
+固定使用简洁的 Claude 浅色主题和 medium 画布：高 10.5cm，宽由比例决定。正文 12pt，内容标题 19pt。字体、颜色、布局档位、计数器类型和封面开关不作为模板配置。
 
 例如，关闭目录并使用 4:3：
 
@@ -117,7 +117,7 @@ typst watch my-talk/main.typ my-talk.pdf
 从包入口按需导入：
 
 ```typst
-#import "@local/typst-claude-ppt:0.1.0": card, callout, two-columns, message, artifact
+#import "@local/typst-claude-ppt:0.1.0": card, callout, two-columns
 ```
 
 | 写法 | 用途 |
@@ -125,10 +125,8 @@ typst watch my-talk/main.typ my-talk.pdf
 | `#card(title: [标题])[内容]` | 带细边框的卡片，标题可省略 |
 | `#callout(title: [提示])[内容]` | 带橙色侧线的提示区，默认标题为“提示”；`title: none` 隐藏标题 |
 | `#two-columns([左侧], [右侧])` | 等宽双栏，可在两栏中放卡片或图片 |
-| `#message[问题]` | 右侧用户消息 |
-| `#message(role: "assistant")[回答]` | 左侧助手回复 |
-| `#artifact(title: [成果标题])[内容]` | 带标题栏的成果面板 |
 
+这些组件只用于组织学术内容。页面结构使用标题、段落、列表、表格、图表和公式，不包含对话气泡或 Artifact 面板。
 列表、编号、引用、表格、原生 `figure` 图注、数学公式、链接、行内代码和代码块均已应用主题。表格首行使用弱背景，语义表头建议使用 `table.header(...)`。代码块支持语法配色及自然换行。
 
 图片直接在自己的文稿中加载，再作为内容传入组件：
@@ -149,13 +147,13 @@ typst watch my-talk/main.typ my-talk.pdf
 | 用途 | 字体链 |
 | --- | --- |
 | 正文、标题 | `Anthropic Serif Web Text` → `Source Han Serif SC` |
-| 标签、页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Serif SC` |
+| 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Serif SC` |
 | 代码 | `Anthropic Mono Web` → `Source Han Serif SC` |
 | 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
 字体不随包分发。当前 Anthropic 系统字体只有 Regular 实例，粗体/斜体的效果由编译器及实际字体决定。中文代码回退至宋体，不能用字符数量假定中西文等宽。
 
-内容标题最多两行，过长会明确报错；建议将解释性文字放入正文。卡片、提示和 Artifact 是完整面板，过高会提示拆页。普通正文与长表格可自然续页，复杂内容仍建议检查逐页预览。
+内容标题最多两行，过长会明确报错；建议将解释性文字放入正文。卡片和提示区是完整面板，过高会提示拆页。普通正文与长表格可自然续页，复杂内容仍建议检查逐页预览。
 
 连续 24 字符以上的代码 token 会加入零宽换行机会，避免长标识符或 URL 越界。从 PDF 复制这类代码可能包含零宽空格，执行代码请使用原始源码。
 

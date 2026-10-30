@@ -1,4 +1,4 @@
-#import "../src/lib.typ": artifact, callout, card, message, slides, two-columns
+#import "../src/lib.typ": callout, card, slides, two-columns
 
 #show: slides.with(
   title: [让想法清晰呈现],
@@ -72,32 +72,20 @@ $ "平均值" = 1/n sum_(i=1)^n x_i $
   这一页延续上一页的二级标题与编号。页内小标题不编号。
 ]
 
-= 从对话到成果
+= 从证据到结论
 
-== 像对话一样，逐步展开思考
+== 将证据组织成可以检验的论证
 
-#message[怎样把复杂的研究，讲给第一次接触的人听？]
-#v(9pt)
-#message(role: "assistant")[
-  从一个具体的问题开始，再逐步建立结构。
+从研究问题出发，依次说明方法、证据和限制。
 
-  + 先说清它为什么值得关注。
-  + 只保留支撑结论的关键证据。
-  + 给听众一个明确的下一步。
-]
-
-== 将想法，放进可以使用的成果里
-
-#artifact(title: [研究计划 · Research plan])[
-  #two-columns(
-    [*现在知道什么*
-
-      问题的背景、已有证据与尚未解决的部分。],
-    [*接下来做什么*
-
-      一个可验证的假设，以及一项具体的行动。],
-  )
-]
+#two-columns(
+  card(title: [证据])[
+    说明数据来源、测量方式和分析过程。
+  ],
+  card(title: [结论])[
+    明确结论适用的范围，以及仍然未知的部分。
+  ],
+)
 
 == 从一段简洁的源码开始
 
@@ -120,6 +108,6 @@ def describe(idea):
     # 从一个清晰的想法开始
     return {"title": idea, "steps": ["理解", "探索", "验证"]}
 
-message = describe("Make ideas visible")
-print(message)
+result = describe("Make ideas visible")
+print(result)
 ```

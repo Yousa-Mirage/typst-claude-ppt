@@ -1,2 +1,2 @@
 #import "slides.typ": slides
-#import "components.typ": card, callout, two-columns, message, artifact
+#import "components.typ": card, callout, two-columns
