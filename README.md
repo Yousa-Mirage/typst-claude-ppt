@@ -1,10 +1,10 @@
-# typst-claude-ppt
+# Typst-Claude-PPT
 
-个人使用的 Claude 浅色风格 Typst 幻灯片模板。需要 Typst 0.13.0 及以上。
+个人使用的 Claude 浅色风格 Typst 幻灯片模板，需要 Typst 0.13.0 及以上。[可查看演示 PDF](examples/showcase.pdf)。
 
-[可查看演示 PDF](examples/showcase.pdf)。
+同时包含对应的 [Quarto 扩展](#在-quarto-中使用)，可以在 Quarto 中使用，将 Quarto 文稿直接渲染为使用本模板的 PDF 幻灯片。
 
-## 在自己的文稿中使用
+## 本地使用
 
 目前没有发布到 Typst Universe 的计划。推荐使用 [`typship`](https://github.com/sjfhsjfh/typship) 从 GitHub 下载安装包。
 
@@ -17,6 +17,15 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 ```typst
 #import "@local/typst-claude-ppt:0.1.0": *
 ```
+
+同时还需要安装一些字体，包括 Anthropic 系列和思源系列。具体如下，字体可从网络自行获取。
+
+| 用途 | 字体链 |
+| --- | --- |
+| 正文、标题 | `Anthropic Serif Web Text` → `Source Han Serif SC` |
+| 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Sans SC` |
+| 代码 | `Anthropic Mono` → `Source Han Serif SC` |
+| 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
 ## 文稿写法
 
@@ -50,9 +59,9 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 - 正文过长时自然续页，在标题栏右侧依次显示 `(I)`、`(II)` 等。可使用 `#pagebreak()` 主动分隔。
 - 封面不显示页脚。后续页面默认显示页脚：左下角为 `主标题 | 作者`，右下角为 `当前页 / 总页数`。过长的页脚自动折叠。
 
-## 配置
+### 配置
 
-只提供以下文稿配置：
+提供以下文稿配置：
 
 | 参数 | 默认值 | 说明 |
 | --- | --- | --- |
@@ -64,7 +73,7 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | `footer` | `true` | 控制封面之后的左侧页脚及右侧页码 |
 | `toc` | `true` | 是否生成目录 |
 
-## 内容组件
+### 内容组件
 
 从包入口按需导入：
 
@@ -77,19 +86,6 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | `#card(title: [标题])[内容]` | 带细边框的卡片，标题可省略 |
 | `#callout(title: none)[内容]` | 带橙色侧线的提示区，可添加标题 |
 | `#two-columns([左侧], [右侧])` | 等宽双栏，可放卡片或图片 |
-
-## 使用字体
-
-模板使用的字体如下：
-
-| 用途 | 字体链 |
-| --- | --- |
-| 正文、标题 | `Anthropic Serif Web Text` → `Source Han Serif SC` |
-| 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Sans SC` |
-| 代码 | `Anthropic Mono` → `Source Han Serif SC` |
-| 公式 | `Libertinus Math` → `Source Han Serif SC` |
-
-这些字体可从网络自行获取。
 
 ## 在 Quarto 中使用
 
