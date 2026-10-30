@@ -2,7 +2,7 @@
 
 一个个人使用的 Claude 浅色风格 Typst 幻灯片模板。暖米白画布、炭黑文字、陶土橙点缀，西文优先使用 Anthropic 字体，中文回退至思源宋体。
 
-![两栏卡片与提示区样张](docs/preview.png)
+[查看演示 PDF](examples/showcase.pdf)（运行 `just demo` 后生成）。
 
 ## 效果
 
