@@ -67,12 +67,16 @@
 
 #let running-title() = context {
   let current = here().page()
-  let latest = query(heading.where(level: 1).or(heading.where(level: 2)))
+  let headings = query(heading.where(level: 1).or(heading.where(level: 2)))
+  let latest = headings
     .rev()
     .find(it => it.location().page() <= current)
   if latest != none and latest.level == 2 {
-    if latest.location().page() < current {
-      let continuation = current - latest.location().page() + 1
+    let start = latest.location().page()
+    let next = headings.find(it => it.location().page() > start)
+    let end = if next != none { next.location().page() - 1 } else { counter(page).final().first() }
+    if end > start {
+      let continuation = current - start + 1
       header-label(grid(
         columns: (1fr, auto),
         column-gutter: 14pt,
