@@ -97,7 +97,7 @@ $ "平均值" = 1/n sum_(i=1)^n x_i $
 ```typ
 #show: slides.with(
   title: [让想法清晰呈现],
-  authors: "yousa-mirage",
+  authors: "天然純真",
 )
 
 = 从问题出发
