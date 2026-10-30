@@ -4,19 +4,16 @@
 
 // Metadata and compact footers use textual content; the cover keeps markup.
 #let plain(body) = {
-  if type(body) == str { body }
-  else if type(body) != content { "" }
-  else if body.has("text") { body.text }
-  else if body.has("children") { body.children.map(plain).join() }
-  else if body.has("body") { plain(body.body) }
-  else if body.func() in (linebreak, parbreak) { " " }
-  else { "" }
+  if type(body) == str { body } else if type(body) != content { "" } else if body.has("text") {
+    body.text
+  } else if body.has("children") { body.children.map(plain).join() } else if body.has("body") {
+    plain(body.body)
+  } else if body.func() in (linebreak, parbreak) { " " } else { "" }
 }
 
 #let compact-label(label, width) = context {
   let chars = label.clusters()
-  if measure(label).width <= width { label }
-  else {
+  if measure(label).width <= width { label } else {
     let low = 0
     let high = chars.len()
     while low < high {
@@ -34,9 +31,10 @@
   let author = authors.join("、")
   let label = if authors.len() == 0 { plain(title) } else { author + " | " + plain(title) }
   grid(
-    columns: (1fr, auto), column-gutter: 12pt, align: (left, right),
-    layout(size => compact-label(label, size.width)),
-    counter(page).display("1 / 1", both: true),
+    columns: (1fr, auto),
+    column-gutter: 12pt,
+    align: (left, right),
+    layout(size => compact-label(label, size.width)), counter(page).display("1 / 1", both: true),
   )
 }
 
@@ -44,8 +42,10 @@
   set text(size: 19pt, weight: "regular")
   set par(leading: 0.25em)
   layout(size => {
-    assert(measure(body, width: size.width).height <= 1.4cm,
-      message: "slide title exceeds two lines; shorten the title")
+    assert(
+      measure(body, width: size.width).height <= 1.4cm,
+      message: "slide title exceeds two lines; shorten the title",
+    )
     block(height: 1.4cm, width: 100%)[
       #set align(left + top)
       #body
@@ -57,7 +57,10 @@
   if it.numbering != none {
     // Continuation pages reuse the counter at the original heading's location.
     let prefix = numbering(it.numbering, ..counter(heading).at(it.location()))
-    if prefix != none { prefix; h(0.45em) }
+    if prefix != none {
+      prefix
+      h(0.45em)
+    }
   }
   it.body
 }
@@ -65,7 +68,8 @@
 #let running-title() = context {
   let current = here().page()
   let latest = query(heading.where(level: 1).or(heading.where(level: 2)))
-    .rev().find(it => it.location().page() <= current)
+    .rev()
+    .find(it => it.location().page() <= current)
   if latest != none and latest.level == 2 {
     header-label[
       #numbered-title(latest)
@@ -93,7 +97,11 @@
     #v(1fr)
     #text(font: fonts.sans, size: 9pt, fill: colors.muted)[
       #authors.join("、")
-      #if authors.len() > 0 and date != none { h(0.7em); [·]; h(0.7em) }
+      #if authors.len() > 0 and date != none {
+        h(0.7em)
+        [·]
+        h(0.7em)
+      }
       #if date != none { date }
     ]
   ]
@@ -115,15 +123,21 @@
 
 #let contents() = context {
   let sections = query(heading.where(level: 1, outlined: true))
-  let target = if sections.len() > 0 { heading.where(level: 1, outlined: true) } else { heading.where(level: 2, outlined: true) }
+  let target = if sections.len() > 0 { heading.where(level: 1, outlined: true) } else {
+    heading.where(level: 2, outlined: true)
+  }
   if query(target).len() > 0 {
     set page(header: header-label[目录])
     show outline.entry: it => block(above: 0pt, below: 10pt, breakable: false)[
       #link(it.element.location())[
         #grid(
-          columns: (1fr, auto), column-gutter: 12pt,
+          columns: (1fr, auto),
+          column-gutter: 12pt,
           numbered-title(it.element),
-          text(font: fonts.sans, size: 9pt, fill: colors.faint, numbering("1", ..counter(page).at(it.element.location()))),
+          text(font: fonts.sans, size: 9pt, fill: colors.faint, numbering(
+            "1",
+            ..counter(page).at(it.element.location()),
+          )),
         )
       ]
     ]
@@ -138,12 +152,12 @@
   subtitle: none,
   date: none,
   authors: (),
-  ratio: 16/9,
+  ratio: 16 / 9,
   footer: true,
   toc: true,
 ) = {
   assert(title != none and plain(title).trim() != "", message: "title must be non-empty text or content")
-  assert(ratio in (16/9, 4/3), message: "ratio must be 16/9 or 4/3")
+  assert(ratio in (16 / 9, 4 / 3), message: "ratio must be 16/9 or 4/3")
   assert(type(footer) == bool and type(toc) == bool, message: "footer and toc must be booleans")
   let authors = if authors == none { () } else if type(authors) == str { (authors,) } else { authors }
   assert(type(authors) == array, message: "authors must be a string or an array of strings")
@@ -156,11 +170,14 @@
   show: elements
   set heading(numbering: numbly("{1}", "{1}.{2}", default: none))
   set page(
-    width: medium.height * ratio, height: medium.height,
+    width: medium.height * ratio,
+    height: medium.height,
     fill: colors.background,
     margin: (x: medium.space / 2, top: 2.3cm, bottom: 0.9cm),
-    header: running-title(), header-ascent: 0.3cm,
-    footer: if footer { page-footer(title, authors) }, footer-descent: 0.4cm,
+    header: running-title(),
+    header-ascent: 0.2cm,
+    footer: if footer { page-footer(title, authors) },
+    footer-descent: 0.4cm,
     numbering: none,
   )
   show heading.where(level: 1): section-slide
