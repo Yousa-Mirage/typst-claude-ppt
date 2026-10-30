@@ -29,7 +29,7 @@
 #let page-footer(title, authors) = context {
   set text(font: fonts.sans, size: 7pt, fill: colors.muted)
   let author = authors.join("、")
-  let label = if authors.len() == 0 { plain(title) } else { author + " | " + plain(title) }
+  let label = if authors.len() == 0 { plain(title) } else { plain(title) + " | " + author }
   grid(
     columns: (1fr, auto),
     column-gutter: 12pt,
