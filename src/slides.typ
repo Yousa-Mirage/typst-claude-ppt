@@ -1,3 +1,4 @@
+#import "@preview/numbly:0.1.0": numbly
 #import "theme.typ": colors, fonts, medium, typography
 #import "elements.typ": elements
 
@@ -52,13 +53,22 @@
   })
 }
 
+#let numbered-title(it) = context {
+  if it.numbering != none {
+    // Continuation pages reuse the counter at the original heading's location.
+    let prefix = numbering(it.numbering, ..counter(heading).at(it.location()))
+    if prefix != none { prefix; h(0.45em) }
+  }
+  it.body
+}
+
 #let running-title() = context {
   let current = here().page()
   let latest = query(heading.where(level: 1).or(heading.where(level: 2)))
     .rev().find(it => it.location().page() <= current)
   if latest != none and latest.level == 2 {
     header-label[
-      #latest.body
+      #numbered-title(latest)
       #if latest.location().page() < current {
         text(font: fonts.sans, size: 8pt, fill: colors.faint)[#h(0.6em)续]
       }
@@ -94,13 +104,8 @@
   set page(header: none)
   block(height: 100%, width: 100%, breakable: false)[
     #v(1fr)
-    #context {
-      let index = query(heading.where(level: 1)).filter(h => h.location().page() <= here().page()).len()
-      text(font: fonts.sans, size: 9pt, fill: colors.muted)[SECTION #numbering("01", index)]
-    }
-    #v(10pt)
     #set par(leading: 0.3em)
-    #text(size: 27pt, weight: "regular", it.body)
+    #text(size: 27pt, weight: "regular", numbered-title(it))
     #v(14pt)
     #line(length: 22pt, stroke: 2pt + colors.accent)
     #v(1fr)
@@ -117,7 +122,7 @@
       #link(it.element.location())[
         #grid(
           columns: (1fr, auto), column-gutter: 12pt,
-          it.element.body,
+          numbered-title(it.element),
           text(font: fonts.sans, size: 9pt, fill: colors.faint, numbering("1", ..counter(page).at(it.element.location()))),
         )
       ]
@@ -149,6 +154,7 @@
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
   show: typography
   show: elements
+  set heading(numbering: numbly("{1}", "{1}.{2}", default: none))
   set page(
     width: medium.height * ratio, height: medium.height,
     fill: colors.background,
