@@ -29,6 +29,8 @@ status: in progress
 
 内容组件：`mxtzsuuv`，导出 `card`、`callout`、`two-columns`、`badge`、`message`、`artifact`。大于整张内容页的面板会明确报错。10 页真实内容样张 `examples/showcase.typ` 在 16:9 / 4:3 均为 10 页，已检查两栏卡片、对话、Artifact 和代码页。
 
+本地包：`rpnuqqxw`，新增 `[template]`、独立 starter、Makefile。`make package` 只安装到项目的 `.packages/`，不修改全局 Typst 配置。已在仓库以外的临时目录验证 `typst init`、独立编译、包内语法主题和调用方图片。
+
 ## 目标与范围
 
 制作主要供个人使用的 Typst 模板包，以 Claude Web 的浅色视觉语言为方向，以本机 `claude.css` 为具体设计参考，以 diatypst 的标题式幻灯片写作为交互参考。

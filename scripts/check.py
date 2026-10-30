@@ -3,7 +3,9 @@
 
 import json
 import re
+import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +42,36 @@ def compile_case(name, options, body, *, pages=None, error=None):
         "query(heading).map(it => (level: it.level, page: it.location().page()))",
     ))
     return count, text, headings, info
+
+
+def check_package():
+    with tempfile.TemporaryDirectory(prefix="claude-package-") as directory:
+        sandbox = Path(directory)
+        packages = sandbox / "packages"
+        package = packages / "local" / "typst-claude-ppt" / "0.1.0"
+        package.mkdir(parents=True)
+        shutil.copy2(ROOT / "typst.toml", package)
+        for name in ("src", "assets", "template"):
+            shutil.copytree(ROOT / name, package / name)
+        consumer = sandbox / "consumer"
+        run("typst", "init", "--package-path", str(packages),
+            "@local/typst-claude-ppt:0.1.0", str(consumer))
+        main = consumer / "main.typ"
+        pdf = consumer / "main.pdf"
+        run("typst", "compile", "--package-path", str(packages), str(main), str(pdf))
+        assert re.search(r"Pages:\s+6", run("pdfinfo", str(pdf)))
+        (consumer / "sample.svg").write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80">'
+            '<rect width="240" height="80" rx="8" fill="#f0eee6"/>'
+            '<circle cx="120" cy="40" r="18" fill="#d97757"/></svg>', encoding="utf-8"
+        )
+        with main.open("a", encoding="utf-8") as stream:
+            stream.write('\n== 独立项目资源\n#card(title: [文稿自己的图片])[\n'
+                         '#figure(image("sample.svg", width: 60%, alt: "图片路径测试"), caption: [调用方图片])\n]\n'
+                         '\n```python\nprint("package-owned syntax theme")\n```\n')
+        run("typst", "compile", "--package-path", str(packages), str(main), str(pdf))
+        assert "调用方图片" in run("pdftotext", str(pdf), "-")
+    print("PASS: isolated @local import, typst init, package theme and consumer image")
 
 
 def main():
@@ -81,6 +113,7 @@ def main():
     compile_case("bad-authors", 'title: "文稿", authors: (1,)', "", error="authors must contain only strings")
     compile_case("removed-option", 'title: "文稿", layout: "medium"', "", error="unexpected argument")
     print("PASS: pagination, ratios, TOC, footers, metadata, continuation and invalid arguments")
+    check_package()
 
 
 if __name__ == "__main__":

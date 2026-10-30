@@ -10,3 +10,8 @@ keywords = [
     "claude",
 ]
 categories = ["presentation"]
+exclude = ["build", ".packages", "_dev", "scripts", "examples"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
