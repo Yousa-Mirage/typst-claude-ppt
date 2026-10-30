@@ -2,6 +2,7 @@
 name = "typst-claude-ppt"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
+compiler = "0.15.1"
 authors = ["yousa-mirage"]
 description = "一个 Claude 风格的 PPT 模板"
 keywords = [
@@ -9,6 +10,3 @@ keywords = [
     "claude",
 ]
 categories = ["presentation"]
-disciplines = ["sociology"]
-
-[tool]
