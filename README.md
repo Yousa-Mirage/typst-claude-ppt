@@ -9,10 +9,10 @@
 需要 Typst **0.13.0 或更新版本**。仓库开发命令使用 [just](https://github.com/casey/just)，在仓库目录执行：
 
 ```sh
-just demo       # 生成两种比例的 PDF，并用 macOS 默认应用打开
+just demo       # 生成 16:9 PDF，并用 macOS 默认应用打开
 ```
 
-PDF 保存为 `build/showcase.pdf` 和 `build/showcase-4x3.pdf`。justfile 只提供 `demo`，不生成 PNG。
+PDF 保存为 `build/showcase.pdf`。
 
 示例源文件：
 
@@ -24,10 +24,7 @@ PDF 保存为 `build/showcase.pdf` 和 `build/showcase-4x3.pdf`。justfile 只�
 
 ```sh
 typst compile --root . examples/showcase.typ build/showcase.pdf
-typst compile --root . --input ratio=4:3 examples/showcase.typ build/showcase-4x3.pdf
 ```
-
-示例中的 `--input ratio=4:3` 只是 showcase 入口选择比例的方式。模板 API 中使用数值 `ratio: 4/3`。
 
 ## 在自己的文稿中使用
 

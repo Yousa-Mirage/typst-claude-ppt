@@ -1,12 +1,10 @@
 #import "../src/lib.typ": slides, card, callout, two-columns, badge, message, artifact
 
-#let ratio = if sys.inputs.at("ratio", default: "16:9") == "4:3" { 4/3 } else { 16/9 }
 #show: slides.with(
   title: [让想法清晰呈现],
   subtitle: [A quieter space for better ideas.],
   authors: ("yousa-mirage",),
   date: "2026-10-30",
-  ratio: ratio,
 )
 
 = 安静的画布
