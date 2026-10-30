@@ -6,22 +6,10 @@
 
 ## 在自己的文稿中使用
 
-目前没有发布到 Typst Universe 的计划。
-
-推荐使用 **`typship download`** 从 Git 仓库下载安装包。安装好 typship 后，将下面的 `仓库GitURL` 替换为本包的实际仓库地址：
+目前没有发布到 Typst Universe 的计划。推荐使用 [`typship`](https://github.com/sjfhsjfh/typship) 从 GitHub 下载安装包。
 
 ```sh
-typship download "仓库GitURL"
-typst init @local/typst-claude-ppt:0.1.0 my-talk
-typst compile my-talk/main.typ my-talk.pdf
-```
-
-`typship download` 默认将包安装到 Typst 的 `@local` 命名空间，之后不需要额外指定 `--package-path`。导入版本应与下载版本的 `typst.toml` 一致，当前为 `0.1.0`。如需指定已存在的标签、提交或分支，可使用 `typship download --checkout "Git引用" "仓库GitURL"`。
-
-实时预览：
-
-```sh
-typst watch my-talk/main.typ my-talk.pdf
+typship download https://github.com/yousa-mirage/typst-claude-ppt
 ```
 
 ## 文稿写法
@@ -71,12 +59,6 @@ typst watch my-talk/main.typ my-talk.pdf
 | `ratio` | `16/9` | 只接受 `16/9` 和 `4/3` |
 | `footer` | `true` | 控制封面之后的左侧页脚及右侧页码 |
 | `toc` | `true` | 是否生成目录 |
-
-例如，关闭目录并使用 4:3：
-
-```typst
-#show: slides.with(title: [我的演示], authors: "作者", ratio: 4/3, toc: false)
-```
 
 ## 内容组件
 
