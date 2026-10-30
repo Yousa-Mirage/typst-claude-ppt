@@ -87,14 +87,16 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 
 ## 在 Quarto 中使用
 
-Quarto 1.10 及以上已支持 Typst 格式渲染，因此也可以使用该模板。首先安装 `typst`、`quarto`、`typship` 和前文列出的字体。在自己的 Quarto 项目根目录中依次运行以下命令，安装 Typst 模板包和 Quarto 扩展：
+Quarto 1.10 及以上已支持 Typst 格式渲染，因此也可以使用该模板。完整写法和导出效果可参考 [Quarto 示例代码](examples/quarto.qmd) 和 [示例 PDF](examples/quarto.pdf)。
+
+首先安装 `typst`、`quarto`、`typship` 和前文列出的字体。在自己的 Quarto 项目根目录中依次运行以下命令，安装 Typst 模板包和 Quarto 扩展：
 
 ```sh
 typship download https://github.com/Yousa-Mirage/typst-claude-ppt
 quarto add Yousa-Mirage/typst-claude-ppt
 ```
 
-第一条命令将 Typst 包安装到本机的 `@local/typst-claude-ppt:0.1.0`；第二条命令将 Quarto 扩展安装到**当前项目**的 `_extensions/` 路径下。安装完成后，在项目中的 Quarto 文稿中使用 `format: claude-ppt-typst` 即可使用本模板。
+第一条命令将 Typst 包安装到本机的 `@local/typst-claude-ppt:0.1.0`；第二条命令将 Quarto 扩展安装到**当前项目**的 `_extensions/` 路径下。安装完成后，在项目中的 Quarto 文稿中配置 `format: claude-ppt-typst` 即可应用本模板。
 
 以下为一个简单示例 `slides.qmd`：
 
@@ -127,7 +129,9 @@ format: claude-ppt-typst
 quarto render slides.qmd
 ```
 
-生成的 PDF 为同目录下的 `slides.pdf`。完整写法可参考 [Quarto 示例代码](examples/quarto.qmd) 和 [示例 PDF](examples/quarto.pdf)。
+生成的 PDF 为同目录下的 `slides.pdf`。
+
+### 基本配置
 
 - `title`、`subtitle`、`date` 对应模板元数据。
 - `#` 开始章节页，`##` 开始内容页。编号、目录和续页标记沿用 Typst 模板的规则。
