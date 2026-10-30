@@ -23,7 +23,11 @@
   radius: 3pt,
 )[
   #if title != none {
-    block(below: 6pt)[#text(font: fonts.sans, size: 10pt, weight: "regular", fill: colors.muted, title)]
+    block(below: 6pt)[
+      #text(font: fonts.sans, size: 10pt, weight: "regular", fill: colors.muted)[
+        #text(fill: colors.accent)[•]#h(0.5em)#title
+      ]
+    ]
   }
   #body
 ]

@@ -38,6 +38,7 @@
   set quote(block: true)
   show quote.where(block: true): it => block(
     width: 100%,
+    fill: colors.surface,
     inset: (left: 12pt, y: 6pt),
     stroke: (left: 2pt + colors.accent),
   )[
