@@ -1,0 +1,16 @@
+title: Claude PPT
+author: Yousa-Mirage
+version: 0.1.0
+quarto-required: ">=1.10.0"
+contributes:
+  formats:
+    typst:
+      toc: true
+      footer: true
+      ratio: 16/9
+      shift-heading-level-by: 0
+      syntax-highlighting: idiomatic
+      template-partials:
+        - typst-template.typ
+        - typst-show.typ
+        - biblio.typ

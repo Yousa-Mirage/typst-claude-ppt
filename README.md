@@ -89,6 +89,66 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | 代码 | `Anthropic Mono` → `Source Han Serif SC` |
 | 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
+## 在 Quarto 中使用
+
+`quarto` 开发书签中提供基础扩展，格式名为 `claude-ppt-typst`。需要 Quarto 1.10 及以上，按前文使用 `typship download` 安装 Typst 包，并在系统中安装所需字体。扩展直接调用 `@local/typst-claude-ppt:0.1.0`，与原生 Typst 文稿共用同一套样式。
+
+在本仓库中运行：
+
+```sh
+quarto render examples/quarto.qmd
+```
+
+生成的文件为 `examples/quarto.pdf`，不会自动打开。[查看 Quarto 示例源码](examples/quarto.qmd)。
+
+在其他项目中使用时，从 `quarto` 书签检出后，将本仓库的 `_extensions/claude-ppt` 目录复制到项目的 `_extensions/claude-ppt` 下。扩展不会自动安装 Typst 包。
+
+最小文稿示例：
+
+```markdown
+---
+title: 主标题
+subtitle: 副标题
+author: 你的名字
+date: 2026-10-31
+format: claude-ppt-typst
+---
+
+# 章节标题
+
+## 内容页
+
+用 Markdown 撰写正文。
+
+{{< pagebreak >}}
+
+同一主题的续页。
+```
+
+- `title`、`subtitle`、`date` 对应模板元数据；Quarto 的 `author` 自动转换为模板的作者列表，也支持多个作者及 `name` 字段。
+- `#` 开始章节页，`##` 开始内容页，`###` 及以下为页内标题。编号、目录和续页标记沿用 Typst 模板的规则。全文只有 `##` 时按 `1`、`2` 编号，不生成目录。
+- 默认 `ratio: 16/9`、`toc: true`、`footer: true`。可以在格式配置中覆盖：
+
+```yaml
+format:
+  claude-ppt-typst:
+    ratio: 4/3
+    toc: false
+    footer: false
+```
+
+代码块使用 Typst 原生高亮。公式、图片和表格使用 Quarto 的常规写法；原生参考文献处理会将参考文献放在单独的内容页，可用 `reference-section-title` 修改标题。示例文稿展示了 `bibliography` 与 `[@typst-docs]` 引用的写法。
+
+模板组件可在原生 Typst 块中通过 `claude` 命名空间调用：
+
+````markdown
+```{=typst}
+#claude.callout[需要强调的结论。]
+```
+````
+
+基础扩展尚未将 Quarto 的 callout 和布局语法映射为模板组件；需要这些组件时，先使用上述原生 Typst 写法。
+
 ## 致谢
 
 参考了 [diatypst](https://typst.app/universe/package/diatypst/) 的实现思路。

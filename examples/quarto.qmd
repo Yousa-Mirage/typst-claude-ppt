@@ -1,0 +1,64 @@
+---
+title: "用 Quarto 撰写学术幻灯片"
+subtitle: "Markdown 内容，Typst 排版"
+author:
+  - name: "Yousa Mirage"
+  - name: "天然純真"
+date: 2026-10-31
+format: claude-ppt-typst
+bibliography: quarto.bib
+---
+
+# 从问题出发
+
+## 让证据靠近观点
+
+使用 Markdown 撰写正文，使用 Typst 完成最终排版。
+
+- 从一个值得回答的问题出发。
+- 将证据放在观点附近。
+  - 数据解释现象。
+  - 案例帮助理解。
+
+> 先想清楚，再说清楚。
+
+## 用代码与公式表达方法
+
+```python
+def mean(values):
+    return sum(values) / len(values)
+```
+
+行内代码 `mean(values)` 保持周围文字的字号。
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+
+{{< pagebreak >}}
+
+### 同一主题继续展开
+
+主动分页后保留主题编号，右上角的罗马数字随页数递增。
+
+| 内容 | 用途 |
+|---|---|
+| 代码 | 描述计算步骤 |
+| 公式 | 表达数学关系 |
+| 文字 | 说明适用范围 |
+
+# 从证据到结论
+
+## 使用现有模板组件
+
+```{=typst}
+#claude.callout[每一页，只围绕一个主要观点展开。]
+```
+
+模板组件可以通过原生 Typst 块调用；常规内容仍使用 Markdown。
+
+## 查阅文档与引用来源
+
+Typst 的语言与排版规则见官方文档 [@typst-docs]。
+
+访问 [Quarto Typst 文档](https://quarto.org/docs/output-formats/typst.html)，了解代码、图表和交叉引用的写法。
