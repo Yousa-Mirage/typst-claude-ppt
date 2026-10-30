@@ -11,7 +11,7 @@
   set enum(indent: 0pt, body-indent: 0.65em, spacing: 0.6em)
   set terms(spacing: 0.65em)
 
-  show raw: set text(font: fonts.mono, size: 0.82em)
+  show raw: set text(font: fonts.mono)
   show raw.where(block: false): it => box(
     fill: colors.surface,
     radius: 2pt,
@@ -27,7 +27,7 @@
     breakable: true,
   )[
     #set par(leading: 0.5em)
-    #show raw: set text(size: 10pt)
+    #show raw: set text(size: 11pt)
     #show raw.line: line => {
       show regex("\\S{24,}"): token => token.text.clusters().join(sym.zws)
       line.body
