@@ -1,0 +1,14 @@
+[package]
+name = "typst-claude-ppt"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["yousa-mirage"]
+description = "一个 Claude 风格的 PPT 模板"
+keywords = [
+    "PPT",
+    "claude",
+]
+categories = ["presentation"]
+disciplines = ["sociology"]
+
+[tool]
