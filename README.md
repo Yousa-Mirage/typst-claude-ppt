@@ -10,10 +10,9 @@
 
 ```sh
 just demo       # 生成两种比例的 PDF，并用 macOS 默认应用打开
-just preview    # 同时生成逐页 PNG
 ```
 
-PDF 保存为 `build/showcase.pdf` 和 `build/showcase-4x3.pdf`。`just preview` 会先执行 `demo`，因此也会打开这两份 PDF。
+PDF 保存为 `build/showcase.pdf` 和 `build/showcase-4x3.pdf`。justfile 只提供 `demo`，不生成 PNG。
 
 示例源文件：
 
@@ -50,23 +49,7 @@ typst watch my-talk/main.typ my-talk.pdf
 
 ### 从本地源码开发
 
-修改模板源码时，可以将包复制到项目的 `.packages/`，独立验证修改：
-
-```sh
-just package
-typst init --package-path "$PWD/.packages" @local/typst-claude-ppt:0.1.0 build/my-talk
-typst compile --package-path "$PWD/.packages" build/my-talk/main.typ build/my-talk.pdf
-```
-
-开发时实时预览：
-
-```sh
-typst watch --package-path "$PWD/.packages" build/my-talk/main.typ build/my-talk.pdf
-```
-
-以上命令在仓库目录运行，不修改系统 Typst 配置。若把文稿移到其他位置，继续传入这个包目录的绝对路径。修改包源码后重新运行 `just package`，再编译自己的文稿。
-
-已有本地 Typst 包目录时，也可以运行 `just --set package_root "/你的/包目录" package`，目录内会生成 `local/typst-claude-ppt/0.1.0/`。项目暂未发布到 `@preview`。
+修改模板源码后，运行 `just demo` 查看结果。示例直接导入 `src/lib.typ`，无需安装本地包。项目暂未发布到 `@preview`。
 
 ## 文稿写法
 
