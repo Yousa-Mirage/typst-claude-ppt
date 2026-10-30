@@ -37,6 +37,8 @@ status: done
 
 交付文件：`src/lib.typ`、`README.md`、`template/main.typ`、`examples/showcase.typ`、`build/showcase.pdf`、`build/showcase-4x3.pdf`。后续视觉调整继续新建独立 jj change。
 
+后续调整（2026-10-30）：按用户要求删除 Makefile，迁移为 `justfile`，保留 `demo`、`preview`、`check`、`package` 四个任务。README 已同步使用 `just`；上面的 `make` 命令仅记录当时的验证历史。
+
 ## 目标与范围
 
 制作主要供个人使用的 Typst 模板包，以 Claude Web 的浅色视觉语言为方向，以本机 `claude.css` 为具体设计参考，以 diatypst 的标题式幻灯片写作为交互参考。
