@@ -12,10 +12,6 @@ preview: demo
     typst compile --root . examples/showcase.typ 'build/showcase-{p}.png'
     typst compile --root . --input ratio=4:3 examples/showcase.typ 'build/showcase-4x3-{p}.png'
 
-# Check pagination, layout bounds and standalone package use.
-check:
-    python3 scripts/check.py
-
 # Copy the package into a local Typst package directory.
 package:
     mkdir -p {{quote(package_dir)}}
