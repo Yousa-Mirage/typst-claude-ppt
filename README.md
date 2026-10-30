@@ -117,7 +117,7 @@ typst watch my-talk/main.typ my-talk.pdf
 从包入口按需导入：
 
 ```typst
-#import "@local/typst-claude-ppt:0.1.0": card, callout, two-columns, badge, message, artifact
+#import "@local/typst-claude-ppt:0.1.0": card, callout, two-columns, message, artifact
 ```
 
 | 写法 | 用途 |
@@ -125,7 +125,6 @@ typst watch my-talk/main.typ my-talk.pdf
 | `#card(title: [标题])[内容]` | 带细边框的卡片，标题可省略 |
 | `#callout(title: [提示])[内容]` | 带橙色侧线的提示区，默认标题为“提示”；`title: none` 隐藏标题 |
 | `#two-columns([左侧], [右侧])` | 等宽双栏，可在两栏中放卡片或图片 |
-| `#badge[标签]` | 小号圆角标签 |
 | `#message[问题]` | 右侧用户消息 |
 | `#message(role: "assistant")[回答]` | 左侧助手回复 |
 | `#artifact(title: [成果标题])[内容]` | 带标题栏的成果面板 |

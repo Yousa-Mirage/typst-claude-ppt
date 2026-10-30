@@ -30,12 +30,6 @@
   left, right,
 )
 
-#let badge(body) = box(
-  fill: colors.surface, stroke: 0.5pt + colors.border,
-  radius: 20pt, inset: (x: 7pt, y: 3pt),
-  text(font: fonts.sans, size: 8pt, fill: colors.muted, body),
-)
-
 #let message(body, role: "user") = {
   assert(role in ("user", "assistant"), message: "message role must be user or assistant")
   if role == "user" {

@@ -1,4 +1,4 @@
-#import "../src/lib.typ": artifact, badge, callout, card, message, slides, two-columns
+#import "../src/lib.typ": artifact, callout, card, message, slides, two-columns
 
 #show: slides.with(
   title: [让想法清晰呈现],
@@ -11,8 +11,6 @@
 
 == 为内容留出呼吸的空间
 
-#badge[Claude-inspired · Light]
-#v(7pt)
 #two-columns(
   card(title: [01 / 清晰])[
     让观点成为主角。
@@ -100,9 +98,6 @@ $ "平均值" = 1/n sum_(i=1)^n x_i $
       一个可验证的假设，以及一项具体的行动。],
   )
 ]
-
-#v(8pt)
-#badge[清晰的结构 → 可执行的计划]
 
 == 从一段简洁的源码开始
 
