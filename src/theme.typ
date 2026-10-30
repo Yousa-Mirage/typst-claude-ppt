@@ -82,15 +82,20 @@
   set table(
     inset: (x: 8pt, y: 6pt),
     stroke: (x: none, y: 0.5pt + colors.border),
-    align: left + top,
+    align: left + horizon,
     fill: (x, y) => if y == 0 { colors.surface },
   )
-  show table: set text(size: 10pt)
+  show table: set text(size: 10.5pt)
+  show table: it => align(center, it)
+  // Preserve column alignment while centering cells vertically, including Pandoc tables.
+  set table.cell(align: horizon)
+  // Replacing a cell body requires keeping its resolved inset.
+  show table.cell.where(y: 0): it => pad(..it.inset, align(center + horizon, it.body))
   show table.header: set text(font: fonts.sans, weight: "bold")
   show table.cell.where(y: 0): set text(font: fonts.sans, weight: "bold")
 
   set figure(gap: 7pt)
-  show figure.caption: set text(font: fonts.sans, size: 8pt, fill: colors.muted)
+  show figure.caption: set text(font: fonts.sans, size: 9pt, fill: colors.muted)
   show link: it => {
     if type(it.dest) == str {
       underline(stroke: 0.6pt + colors.accent.darken(20%), offset: 2pt, text(fill: colors.accent.darken(20%), it))
