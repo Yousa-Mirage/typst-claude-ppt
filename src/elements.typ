@@ -60,7 +60,7 @@
   show figure.caption: set text(font: fonts.sans, size: 8pt, fill: colors.muted)
   show link: it => {
     if type(it.dest) == str {
-      underline(stroke: 0.6pt + colors.accent, offset: 2pt, it)
+      underline(stroke: 0.6pt + colors.accent.darken(20%), offset: 2pt, text(fill: colors.accent.darken(20%), it))
     } else { it }
   }
   body
