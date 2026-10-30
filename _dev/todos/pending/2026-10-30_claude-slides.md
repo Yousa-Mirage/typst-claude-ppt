@@ -25,6 +25,8 @@ status: in progress
 
 验证记录：核心 API 已通过 `python3 scripts/check.py`，覆盖 16:9 / 4:3、目录开关/长目录/无章节回退、封面独页、空内容页、续页、作者缺省、页脚省略号和非法参数。已目视检查两种比例、两行标题与封面。标题超过两行会给出明确错误；页脚长文字按宽度省略。change：`xnsmmylo`（固定主题）、`kospzorp`（分页与页脚）。
 
+原生元素样式：`pnpwzuxr`，已增加列表、枚举、术语、引用、三线表、公式、图注、链接和代码块；自有 `claude.tmTheme` 提供沉稳的语法颜色。`examples/elements.typ` 已编译和目视检查，核心分页回归通过。
+
 ## 目标与范围
 
 制作主要供个人使用的 Typst 模板包，以 Claude Web 的浅色视觉语言为方向，以本机 `claude.css` 为具体设计参考，以 diatypst 的标题式幻灯片写作为交互参考。

@@ -1,4 +1,5 @@
 #import "theme.typ": colors, fonts, medium, typography
+#import "elements.typ": elements
 
 // Metadata and compact footers use textual content; the cover keeps markup.
 #let plain(body) = {
@@ -147,6 +148,7 @@
 
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
   show: typography
+  show: elements
   set page(
     width: medium.height * ratio, height: medium.height,
     fill: colors.background,

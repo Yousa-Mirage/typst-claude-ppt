@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>name</key><string>Claude Light</string>
+  <key>settings</key><array>
+    <dict><key>settings</key><dict>
+      <key>foreground</key><string>#141413</string>
+      <key>background</key><string>#FDFCF9</string>
+    </dict></dict>
+    <dict><key>scope</key><string>comment</string><key>settings</key><dict>
+      <key>foreground</key><string>#73726C</string>
+    </dict></dict>
+    <dict><key>scope</key><string>keyword, storage, constant.language</string><key>settings</key><dict>
+      <key>foreground</key><string>#8A2424</string>
+    </dict></dict>
+    <dict><key>scope</key><string>string</string><key>settings</key><dict>
+      <key>foreground</key><string>#526044</string>
+    </dict></dict>
+    <dict><key>scope</key><string>entity.name.function, support.function, constant.numeric</string><key>settings</key><dict>
+      <key>foreground</key><string>#775840</string>
+    </dict></dict>
+  </array>
+</dict></plist>
