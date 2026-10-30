@@ -61,8 +61,6 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 
 ### 配置
 
-提供以下文稿配置：
-
 | 参数 | 默认值 | 说明 |
 | --- | --- | --- |
 | `title` | 必填 | 非空字符串或 Typst 文本内容 |
