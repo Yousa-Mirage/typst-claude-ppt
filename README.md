@@ -12,6 +12,12 @@
 typship download https://github.com/yousa-mirage/typst-claude-ppt
 ```
 
+`typship download` 会将包默认安装到本地的 `@local` 命名空间中，安装完成后即可在 Typst 中导入使用：
+
+```typst
+#import "@local/typst-claude-ppt:0.1.0": *
+```
+
 ## 文稿写法
 
 ```typst
