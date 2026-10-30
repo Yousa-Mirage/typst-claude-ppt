@@ -131,9 +131,7 @@
 }
 
 #let contents() = context {
-  let sections = section-heading.and(heading.where(outlined: true))
-  let topics = content-heading.and(heading.where(outlined: true))
-  let target = if query(sections).len() > 0 { sections } else { topics }
+  let target = section-heading.and(heading.where(outlined: true))
   if query(target).len() > 0 {
     set page(header: header-label[目录])
     show outline.entry: it => block(above: 0pt, below: 10pt, breakable: false)[
@@ -175,7 +173,11 @@
 
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
   show: theme
-  set heading(numbering: numbly("{1}", "{1}.{2}", default: none))
+  set heading(numbering: numbly(
+    "{1}",
+    (section, topic) => if section > 0 { numbering("1.1", section, topic) },
+    default: none,
+  ))
   set page(
     width: dimensions.height * ratio,
     height: dimensions.height,
