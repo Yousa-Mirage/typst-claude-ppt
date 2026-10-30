@@ -38,6 +38,14 @@ Anthropic Serif Web Text 承接英文，思源宋体呈现中文。
 
 他说：“真正清晰的表达，来自对问题的充分理解。”
 
+== 用简洁的语言，组织复杂的信息
+
+- 从一个值得回答的问题出发。
+- 将证据放在观点附近。
+  - 数据解释现象。
+  - 案例帮助理解。
+- 用明确的行动结束讨论。
+
 == 结构，比装饰更重要
 
 #table(
@@ -48,8 +56,9 @@ Anthropic Serif Web Text 承接英文，思源宋体呈现中文。
   [验证], [如何判断？], [下一步行动],
 )
 
-#v(7pt)
-#text(size: 10pt)[让证据靠近观点，让行动紧随结论。]
+$ "平均值" = 1/n sum_(i=1)^n x_i $
+
+#text(size: 10pt)[用表格比较，用公式解释，让证据靠近观点。]
 
 = 从对话到成果
 
@@ -93,4 +102,15 @@ Anthropic Serif Web Text 承接英文，思源宋体呈现中文。
 == 每一页，讲清一个观点
 ```
 
-了解 #link("https://typst.app")[Typst]，让内容与设计一起生长。
+了解 #link("https://typst.app")[Typst]，从 `#show: slides.with(...)` 开始。
+
+== 代码也需要清晰的阅读节奏
+
+```python
+def describe(idea):
+    # 从一个清晰的想法开始
+    return {"title": idea, "steps": ["理解", "探索", "验证"]}
+
+message = describe("Make ideas visible")
+print(message)
+```

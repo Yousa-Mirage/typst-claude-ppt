@@ -1,10 +1,10 @@
 # typst-claude-ppt
 
-一个供个人使用的 Claude 浅色风格 Typst 幻灯片模板。暖米白画布、炭黑文字、陶土橙点缀，西文优先使用 Anthropic 字体，中文回退至思源宋体。无第三方 Typst 包依赖。
+一个个人使用的 Claude 浅色风格 Typst 幻灯片模板。暖米白画布、炭黑文字、陶土橙点缀，西文优先使用 Anthropic 字体，中文回退至思源宋体。
 
 ![两栏卡片与提示区样张](docs/preview.png)
 
-## 先看效果
+## 效果
 
 需要 Typst **0.13.0 或更新版本**。仓库开发命令使用 [just](https://github.com/casey/just)，在仓库目录执行：
 
@@ -14,17 +14,7 @@ just demo       # 生成 16:9 PDF，并用 macOS 默认应用打开
 
 PDF 保存为 `build/showcase.pdf`。
 
-示例源文件：
-
-- [`examples/minimal.typ`](examples/minimal.typ)：最小完整文稿。
-- [`examples/showcase.typ`](examples/showcase.typ)：10 页样张，包含卡片、表格、对话和 Artifact。
-- [`examples/elements.typ`](examples/elements.typ)：列表、引用、公式与代码。
-
-也可以直接编译：
-
-```sh
-typst compile --root . examples/showcase.typ build/showcase.pdf
-```
+示例统一放在 [`examples/showcase.typ`](examples/showcase.typ)，包含卡片、列表、引用、表格、公式、代码、对话和 Artifact。
 
 ## 在自己的文稿中使用
 
