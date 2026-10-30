@@ -1,4 +1,5 @@
-# Compile the showcase PDF and open it.
-demo:
+# Compile the showcase PDF; pass --no-preview to skip opening it.
+demo option="":
+    @if [ {{quote(option)}} != '' ] && [ {{quote(option)}} != '--no-preview' ]; then echo 'Usage: just demo [--no-preview]' >&2; exit 2; fi
     typst compile --root . examples/showcase.typ examples/showcase.pdf
-    open examples/showcase.pdf
+    @if [ {{quote(option)}} != '--no-preview' ]; then open examples/showcase.pdf; fi

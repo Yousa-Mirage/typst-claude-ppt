@@ -10,9 +10,12 @@
 
 ```sh
 just demo       # 生成 16:9 PDF，并用 macOS 默认应用打开
+just demo --no-preview  # 只编译，不打开 PDF
 ```
 
 PDF 保存为 `examples/showcase.pdf`。
+
+自动化和代理执行时使用 `just demo --no-preview`，避免自动打开 PDF 查看器。
 
 示例统一放在 [`examples/showcase.typ`](examples/showcase.typ)，包含卡片、列表、引用、表格、公式、代码、对话和 Artifact。
 
