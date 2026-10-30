@@ -74,7 +74,8 @@
     header-label[
       #numbered-title(latest)
       #if latest.location().page() < current {
-        text(font: fonts.sans, size: 8pt, fill: colors.faint)[#h(0.6em)续]
+        let continuation = current - latest.location().page() + 1
+        text(font: fonts.sans, size: 14pt, fill: colors.faint, h(0.6em) + "(" + str(continuation) + ")")
       }
     ]
   }
