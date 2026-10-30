@@ -9,9 +9,11 @@
 需要 Typst **0.13.0 或更新版本**。仓库开发命令使用 [just](https://github.com/casey/just)，在仓库目录执行：
 
 ```sh
-just demo       # build/showcase.pdf 与 build/showcase-4x3.pdf
+just demo       # 生成两种比例的 PDF，并用 macOS 默认应用打开
 just preview    # 同时生成逐页 PNG
 ```
+
+PDF 保存为 `build/showcase.pdf` 和 `build/showcase-4x3.pdf`。`just preview` 会先执行 `demo`，因此也会打开这两份 PDF。
 
 示例源文件：
 
