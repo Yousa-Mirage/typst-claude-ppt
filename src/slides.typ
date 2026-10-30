@@ -27,7 +27,7 @@
 }
 
 #let page-footer(title, authors) = context {
-  set text(font: fonts.sans, size: 7pt, fill: colors.muted)
+  set text(font: fonts.sans, size: 8pt, fill: colors.muted)
   let author = authors.join("、")
   let label = if authors.len() == 0 { plain(title) } else { plain(title) + " | " + author }
   grid(

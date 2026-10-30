@@ -39,7 +39,7 @@
   show quote.where(block: true): it => block(
     width: 100%,
     fill: colors.surface,
-    inset: (left: 12pt, y: 6pt),
+    inset: (left: 12pt, y: 12pt),
     stroke: (left: 2pt + colors.accent),
   )[
     #set text(fill: colors.muted)
