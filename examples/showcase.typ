@@ -1,9 +1,9 @@
-#import "../src/lib.typ": slides, card, callout, two-columns, badge, message, artifact
+#import "../src/lib.typ": artifact, badge, callout, card, message, slides, two-columns
 
 #show: slides.with(
   title: [让想法清晰呈现],
   subtitle: [A quieter space for better ideas.],
-  authors: ("yousa-mirage",),
+  authors: ("Yousa Mirage", "天然純真"),
   date: "2026-10-30",
 )
 
@@ -94,10 +94,10 @@ $ "平均值" = 1/n sum_(i=1)^n x_i $
   #two-columns(
     [*现在知道什么*
 
-    问题的背景、已有证据与尚未解决的部分。],
+      问题的背景、已有证据与尚未解决的部分。],
     [*接下来做什么*
 
-    一个可验证的假设，以及一项具体的行动。],
+      一个可验证的假设，以及一项具体的行动。],
   )
 ]
 
