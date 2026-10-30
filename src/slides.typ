@@ -118,7 +118,7 @@
         #grid(
           columns: (1fr, auto), column-gutter: 12pt,
           it.element.body,
-          text(font: fonts.sans, size: 9pt, fill: colors.faint, counter(page).display(at: it.element.location())),
+          text(font: fonts.sans, size: 9pt, fill: colors.faint, numbering("1", ..counter(page).at(it.element.location()))),
         )
       ]
     ]

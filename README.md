@@ -6,7 +6,7 @@
 
 ## 先看效果
 
-需要 Typst **0.15.1 或更新版本**和 [just](https://github.com/casey/just)。在仓库目录执行：
+需要 Typst **0.13.0 或更新版本**。仓库开发命令使用 [just](https://github.com/casey/just)，在仓库目录执行：
 
 ```sh
 just demo       # build/showcase.pdf 与 build/showcase-4x3.pdf
@@ -179,6 +179,14 @@ just check
 ```
 
 检查需要 Python 3.9+、Typst 和 Poppler 的 `pdfinfo` / `pdftotext`。覆盖比例、页码/页脚、目录开关与续页、空内容页、日期/作者、两行标题、代码边界、组件错误路径，以及仓库外独立项目的包导入、初始化和图片路径。两种比例的样张都应为 10 页。
+
+已在 Typst **0.13.0、0.13.1、0.14.2、0.15.1** 上通过完整检查。最低版本 0.13.0 来自字体覆盖配置（用于将中文标点交给思源宋体）；0.12.0 不支持这种字体描述符。
+
+可使用 `TYPST` 环境变量指定其他编译器运行检查，不需要替换系统版本：
+
+```sh
+TYPST=/你的/typst路径 just check
+```
 
 开发使用 jj，每项功能先新建 change 并写明描述：
 

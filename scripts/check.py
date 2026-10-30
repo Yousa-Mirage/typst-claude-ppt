@@ -2,6 +2,7 @@
 """Compile public-API cases and inspect PDF pagination using Poppler tools."""
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -11,9 +12,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build" / "checks"
+TYPST = os.environ.get("TYPST", "typst")
 
 
 def run(*args):
+    if args[0] == "typst":
+        args = (TYPST, *args[1:])
     result = subprocess.run(args, cwd=ROOT, text=True, capture_output=True)
     if result.returncode or "warning:" in result.stderr:
         raise AssertionError(f"{' '.join(map(str, args))}\n{result.stdout}{result.stderr}")
@@ -35,9 +39,13 @@ def compile_case(name, options, body, *, pages=None, error=None):
     pdf = source.with_suffix(".pdf")
     source.write_text(
         '#import "/src/lib.typ": slides, card, callout, two-columns, badge, message, artifact\n'
+        '#set page(background: context [\n'
+        '  #if here().page() == 1 [\n'
+        '    #metadata(query(heading).map(it => (level: it.level, page: it.location().page()))) <check-headings>\n'
+        '  ]\n])\n'
         f"#show: slides.with({options})\n{body}\n", encoding="utf-8"
     )
-    command = ["typst", "compile", "--root", str(ROOT), str(source), str(pdf)]
+    command = [TYPST, "compile", "--root", str(ROOT), str(source), str(pdf)]
     if error:
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
         assert result.returncode and error in result.stderr, (name, result.stderr)
@@ -49,10 +57,16 @@ def compile_case(name, options, body, *, pages=None, error=None):
     if pages is not None:
         assert count == pages, (name, count, pages)
     text = run("pdftotext", "-layout", str(pdf), "-")
-    headings = json.loads(run(
-        "typst", "eval", "--root", str(ROOT), "--in", str(source),
-        "query(heading).map(it => (level: it.level, page: it.location().page()))",
-    ))
+    if VERSION >= (0, 15, 0):
+        headings = json.loads(run(
+            "typst", "eval", "--root", str(ROOT), "--in", str(source),
+            "query(heading).map(it => (level: it.level, page: it.location().page()))",
+        ))
+    else:
+        headings = json.loads(run(
+            "typst", "query", "--root", str(ROOT), str(source),
+            "<check-headings>", "--field", "value", "--one",
+        ))
     return count, text, headings, info
 
 
@@ -88,6 +102,10 @@ def check_package():
 
 
 def main():
+    global VERSION
+    version_text = run("typst", "--version")
+    VERSION = tuple(map(int, re.search(r"(\d+)\.(\d+)\.(\d+)", version_text).groups()))
+    print(version_text.strip())
     BUILD.mkdir(parents=True, exist_ok=True)
     body = "= 第一章\n== 内容甲\n正文。\n= 第二章\n== 内容乙\n末页。"
     for name, ratio, expected_width in (("wide", "16/9", 529.134), ("standard", "4/3", 396.850)):
