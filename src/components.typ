@@ -12,7 +12,7 @@
 
 #let card(body, title: none) = panel[
   #if title != none {
-    block(below: 7pt)[#text(font: fonts.sans, size: 10pt, fill: colors.muted, title)]
+    block(below: 7pt)[#text(font: fonts.sans, size: 10pt, weight: "regular", fill: colors.muted, title)]
   }
   #body
 ]
@@ -23,7 +23,7 @@
   radius: 3pt,
 )[
   #if title != none {
-    block(below: 6pt)[#text(font: fonts.sans, size: 10pt, fill: colors.muted, title)]
+    block(below: 6pt)[#text(font: fonts.sans, size: 10pt, weight: "regular", fill: colors.muted, title)]
   }
   #body
 ]

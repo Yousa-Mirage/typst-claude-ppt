@@ -23,6 +23,7 @@
   set text(font: fonts.serif, size: medium.body, fill: colors.ink, lang: "zh", region: "CN")
   set par(leading: 0.65em, spacing: 0.8em, justify: false)
   set heading(numbering: none)
+  show heading: set text(weight: "regular")
   set math.equation(numbering: none)
   show math.equation: set text(font: ("Libertinus Math", "Source Han Serif SC"))
   body

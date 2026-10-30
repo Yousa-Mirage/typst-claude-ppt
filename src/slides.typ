@@ -186,7 +186,7 @@
     // Give even an intentionally empty slide a page before the next heading.
     block(height: 0pt, above: 0pt, below: 0pt)
   }
-  show heading.where(level: 3): set text(size: 14pt, weight: "regular")
+  show heading.where(level: 3): set text(size: 14pt)
   show heading.where(level: 4): set text(size: 12pt)
 
   cover(title, subtitle, authors, displayed-date)
