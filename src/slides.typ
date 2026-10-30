@@ -1,6 +1,8 @@
 #import "@preview/numbly:0.1.0": numbly
-#import "theme.typ": colors, fonts, medium, typography
-#import "elements.typ": elements
+#import "theme.typ": colors, dimensions, fonts, theme
+
+#let section-heading = heading.where(level: 1)
+#let content-heading = heading.where(level: 2)
 
 // Metadata and compact footers use textual content; the cover keeps markup.
 #let plain(body) = {
@@ -43,10 +45,10 @@
   set par(leading: 0.25em)
   layout(size => {
     assert(
-      measure(body, width: size.width).height <= 1.4cm,
+      measure(body, width: size.width).height <= dimensions.header-height,
       message: "slide title exceeds two lines; shorten the title",
     )
-    block(height: 1.4cm, width: 100%)[
+    block(height: dimensions.header-height, width: 100%)[
       #set align(left + top)
       #body
     ]
@@ -67,10 +69,8 @@
 
 #let running-title() = context {
   let current = here().page()
-  let headings = query(heading.where(level: 1).or(heading.where(level: 2)))
-  let latest = headings
-    .rev()
-    .find(it => it.location().page() <= current)
+  let headings = query(section-heading.or(content-heading))
+  let latest = headings.rev().find(it => it.location().page() <= current)
   if latest != none and latest.level == 2 {
     let start = latest.location().page()
     let next = headings.find(it => it.location().page() > start)
@@ -90,7 +90,7 @@
 }
 
 #let cover(title, subtitle, authors, date) = {
-  set page(header: none, footer: none, margin: (x: medium.space / 2, top: 0.7cm, bottom: 0.9cm))
+  set page(header: none, footer: none, margin: (..dimensions.margin, top: dimensions.cover-top))
   block(height: 100%, width: 100%, breakable: false)[
     #v(1fr)
     #line(length: 22pt, stroke: 2pt + colors.accent)
@@ -131,10 +131,9 @@
 }
 
 #let contents() = context {
-  let sections = query(heading.where(level: 1, outlined: true))
-  let target = if sections.len() > 0 { heading.where(level: 1, outlined: true) } else {
-    heading.where(level: 2, outlined: true)
-  }
+  let sections = section-heading.and(heading.where(outlined: true))
+  let topics = content-heading.and(heading.where(outlined: true))
+  let target = if query(sections).len() > 0 { sections } else { topics }
   if query(target).len() > 0 {
     set page(header: header-label[目录])
     show outline.entry: it => block(above: 0pt, below: 10pt, breakable: false)[
@@ -175,22 +174,21 @@
   let displayed-date = if type(date) == datetime { date.display("[year]-[month]-[day]") } else { date }
 
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
-  show: typography
-  show: elements
+  show: theme
   set heading(numbering: numbly("{1}", "{1}.{2}", default: none))
   set page(
-    width: medium.height * ratio,
-    height: medium.height,
+    width: dimensions.height * ratio,
+    height: dimensions.height,
     fill: colors.background,
-    margin: (x: medium.space / 2, top: 2.2cm, bottom: 0.9cm),
+    margin: dimensions.margin,
     header: running-title(),
-    header-ascent: 0.1cm,
+    header-ascent: dimensions.header-ascent,
     footer: if footer { page-footer(title, authors) },
-    footer-descent: 0.4cm,
+    footer-descent: dimensions.footer-descent,
     numbering: none,
   )
-  show heading.where(level: 1): section-slide
-  show heading.where(level: 2): {
+  show section-heading: section-slide
+  show content-heading: {
     pagebreak(weak: true)
     // Give even an intentionally empty slide a page before the next heading.
     block(height: 0pt, above: 0pt, below: 0pt)

@@ -1,10 +1,10 @@
-#import "theme.typ": colors, fonts, medium
+#import "theme.typ": colors, content-height, fonts
 
 // A panel may move to the next page, but must fit on a whole content page.
 #let panel(body, fill: colors.raised, stroke: 0.5pt + colors.border, inset: 12pt, radius: 7pt) = layout(size => {
   let result = block(width: 100%, breakable: false, fill: fill, stroke: stroke, inset: inset, radius: radius, body)
   assert(
-    measure(result, width: size.width).height <= medium.height - 3.2cm,
+    measure(result, width: size.width).height <= content-height,
     message: "panel is taller than a slide; split the content across slides",
   )
   result
