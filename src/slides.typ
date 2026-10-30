@@ -173,11 +173,19 @@
 
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
   show: theme
-  set heading(numbering: numbly(
-    "{1}",
-    (section, topic) => if section > 0 { numbering("1.1", section, topic) },
-    default: none,
-  ))
+  show: body => context {
+    let has-sections = query(section-heading).len() > 0
+    set heading(numbering: numbly(
+      "{1}",
+      (section, topic) => if section > 0 {
+        numbering("1.1", section, topic)
+      } else if not has-sections {
+        numbering("1", topic)
+      },
+      default: none,
+    ))
+    body
+  }
   set page(
     width: dimensions.height * ratio,
     height: dimensions.height,
