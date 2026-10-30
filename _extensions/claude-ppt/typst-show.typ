@@ -1,3 +1,5 @@
+// Pandoc template partial: Quarto/Pandoc expands template variables and conditionals before Typst compilation.
+// Map Quarto metadata to claude.slides and apply the presentation template to the document.
 #show: doc => claude.slides(
   title: [$title$],
 $if(subtitle)$

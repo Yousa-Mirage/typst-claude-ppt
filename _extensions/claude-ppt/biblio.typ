@@ -1,3 +1,5 @@
+// Pandoc template partial: Quarto/Pandoc expands template variables and conditionals before Typst compilation.
+// Render the bibliography on a content slide without adding a chapter or table-of-contents entry.
 $if(citations)$
 $if(csl)$
 #set bibliography(style: "$csl$")
