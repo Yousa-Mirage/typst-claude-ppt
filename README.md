@@ -30,7 +30,25 @@ typst compile --root . --input ratio=4:3 examples/showcase.typ build/showcase-4x
 
 ## 在自己的文稿中使用
 
-先将包复制到项目的 `.packages/`，再创建一份独立文稿：
+推荐使用 **`typship download`** 从 Git 仓库下载安装包。安装好 typship 后，将下面的 `仓库GitURL` 替换为本包的实际仓库地址：
+
+```sh
+typship download "仓库GitURL"
+typst init @local/typst-claude-ppt:0.1.0 my-talk
+typst compile my-talk/main.typ my-talk.pdf
+```
+
+`typship download` 默认将包安装到 Typst 的 `@local` 命名空间，之后不需要额外指定 `--package-path`。导入版本应与下载版本的 `typst.toml` 一致，当前为 `0.1.0`。如需指定已存在的标签、提交或分支，可使用 `typship download --checkout "Git引用" "仓库GitURL"`。
+
+实时预览：
+
+```sh
+typst watch my-talk/main.typ my-talk.pdf
+```
+
+### 从本地源码开发
+
+修改模板源码时，可以将包复制到项目的 `.packages/`，独立验证修改：
 
 ```sh
 make package
@@ -38,7 +56,7 @@ typst init --package-path "$PWD/.packages" @local/typst-claude-ppt:0.1.0 build/m
 typst compile --package-path "$PWD/.packages" build/my-talk/main.typ build/my-talk.pdf
 ```
 
-实时预览：
+开发时实时预览：
 
 ```sh
 typst watch --package-path "$PWD/.packages" build/my-talk/main.typ build/my-talk.pdf
