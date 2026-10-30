@@ -1,3 +1,7 @@
+# Default: List all available recipes.
+default:
+    @just --list
+
 # Compile the showcase PDF; pass --no-preview to skip opening it.
 demo option="":
     @if [ {{ quote(option) }} != '' ] && [ {{ quote(option) }} != '--no-preview' ]; then echo 'Usage: just demo [--no-preview]' >&2; exit 2; fi
