@@ -46,10 +46,9 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 ```
 
 - 封面始终展示；存在一级标题时默认生成目录，目录只包含一级标题。
-- `= 一级标题` 独占章节页，按 `1 标题` 编号；`== 二级标题` 开始内容页，位于某个一级标题下时按 `1.1 标题` 编号。全文没有一级标题时，二级标题按 `1 标题`、`2 标题` 编号。
+- `= 一级标题` 独占章节页，按 `1 标题` 编号；`== 二级标题` 开始内容页，位于某个一级标题下时按 `1.1 标题` 编号。全文没有一级标题时，二级标题按 `1 标题`、`2 标题` 编号。参考文献不参与编号。
 - 正文过长时自然续页，在标题栏右侧依次显示 `(I)`、`(II)` 等。可使用 `#pagebreak()` 主动分隔。
 - 封面不显示页脚。后续页面默认显示页脚：左下角为 `主标题 | 作者`，右下角为 `当前页 / 总页数`。过长的页脚自动折叠。
-- 参考文献使用不编号的内容页标题，不进入目录，也不占用后续标题编号。
 
 ## 配置
 
@@ -90,17 +89,19 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | 代码 | `Anthropic Mono` → `Source Han Serif SC` |
 | 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
+这些字体可从网络自行获取。
+
 ## 在 Quarto 中使用
 
-`quarto` 开发书签中提供基础扩展，格式名为 `claude-ppt-typst`。需要 Quarto 1.10 及以上，按前文使用 `typship download` 安装 Typst 包，并在系统中安装所需字体。扩展直接调用 `@local/typst-claude-ppt:0.1.0`，与原生 Typst 文稿共用同一套样式。
+Quarto 1.10 及以上已支持 Typst 格式渲染。首先确保安装了 `typst`、`quarto`、`typship` 和所需字体，并按前文使用 `typship download` 安装 Typst 包。扩展直接调用 `@local/typst-claude-ppt:0.1.0`，与原生 Typst 文稿共用同一套样式。
 
-在本仓库中运行：
+仓库中包含 [Quarto 示例代码](examples/quarto.qmd)，可通过运行：
 
 ```sh
 quarto render examples/quarto.qmd
 ```
 
-生成的文件为 `examples/quarto.pdf`，不会自动打开。[查看 Quarto 示例源码](examples/quarto.qmd)。
+生成文件 [`examples/quarto.pdf`](examples/quarto.pdf)。
 
 在其他项目中使用时，从 `quarto` 书签检出后，将本仓库的 `_extensions/claude-ppt` 目录复制到项目的 `_extensions/claude-ppt` 下。扩展不会自动安装 Typst 包。
 
