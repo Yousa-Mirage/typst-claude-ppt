@@ -13,7 +13,7 @@
 
 #let fonts = (
   serif: ((name: "Anthropic Serif Web Text", covers: "latin-in-cjk"), "Source Han Serif SC"),
-  sans: ((name: "Anthropic Sans Web Text", covers: "latin-in-cjk"), "Source Han Serif SC"),
+  sans: ((name: "Anthropic Sans Web Text", covers: "latin-in-cjk"), "Source Han Sans SC"),
   mono: ((name: "Anthropic Mono", covers: "latin-in-cjk"), "Source Han Serif SC"),
 )
 

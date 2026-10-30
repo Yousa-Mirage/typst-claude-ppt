@@ -1,6 +1,6 @@
 # typst-claude-ppt
 
-一个个人使用的 Claude 浅色风格 Typst 幻灯片模板。暖米白画布、炭黑文字、陶土橙点缀，西文优先使用 Anthropic 字体，中文回退至思源宋体。
+一个个人使用的 Claude 浅色风格 Typst 幻灯片模板。暖米白画布、炭黑文字、陶土橙点缀，西文优先使用 Anthropic 字体，中文正文使用思源宋体，中文无衬线文字使用思源黑体。
 
 [查看演示 PDF](examples/showcase.pdf)（运行 `just demo` 后生成）。
 
@@ -147,7 +147,7 @@ typst watch my-talk/main.typ my-talk.pdf
 | 用途 | 字体链 |
 | --- | --- |
 | 正文、标题 | `Anthropic Serif Web Text` → `Source Han Serif SC` |
-| 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Serif SC` |
+| 页脚、面板标题 | `Anthropic Sans Web Text` → `Source Han Sans SC` |
 | 代码 | `Anthropic Mono` → `Source Han Serif SC` |
 | 公式 | `Libertinus Math` → `Source Han Serif SC` |
 
