@@ -18,6 +18,10 @@
   )[
     #set par(leading: 0.5em)
     #show raw: set text(size: 10pt)
+    #show raw.line: line => {
+      show regex("\\S{24,}"): token => token.text.clusters().join(sym.zws)
+      line.body
+    }
     #it
   ]
 

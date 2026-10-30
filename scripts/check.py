@@ -135,6 +135,8 @@ def main():
                  '== 内容\n#message(role: "system")[正文]', error="message role must be user or assistant")
     compile_case("long-code", 'title: "文稿", ratio: 4/3',
                  '== 代码\n```python\nvalue = "' + "long-code-" * 24 + '"\n```')
+    compile_case("long-code-token", 'title: "文稿", ratio: 4/3',
+                 '== 代码\n```python\nvalue = "' + "W" * 200 + '"\n```')
     for name, inputs in (("showcase", ()), ("showcase-4x3", ("--input", "ratio=4:3"))):
         pdf = BUILD / f"{name}.pdf"
         run("typst", "compile", "--root", str(ROOT), *inputs,

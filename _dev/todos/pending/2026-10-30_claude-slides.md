@@ -31,6 +31,8 @@ status: in progress
 
 本地包：`rpnuqqxw`，新增 `[template]`、独立 starter、Makefile。`make package` 只安装到项目的 `.packages/`，不修改全局 Typst 配置。已在仓库以外的临时目录验证 `typst init`、独立编译、包内语法主题和调用方图片。
 
+布局回归：`trnyzuvx` 增加导出文字边界检查、两种比例的 10 页样张页数检查、组件错误路径与长代码检查。随后发现 200 个连续西文字母在 4:3 下越界，`yynvnpun` 为长代码 token 添加零宽换行机会，并增加回归用例。PDF 中复制此类代码时可能包含零宽空格，运行代码请使用源码。
+
 ## 目标与范围
 
 制作主要供个人使用的 Typst 模板包，以 Claude Web 的浅色视觉语言为方向，以本机 `claude.css` 为具体设计参考，以 diatypst 的标题式幻灯片写作为交互参考。
