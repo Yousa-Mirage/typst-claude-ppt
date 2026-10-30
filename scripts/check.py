@@ -137,6 +137,8 @@ def main():
                  '== 代码\n```python\nvalue = "' + "long-code-" * 24 + '"\n```')
     compile_case("long-code-token", 'title: "文稿", ratio: 4/3',
                  '== 代码\n```python\nvalue = "' + "W" * 200 + '"\n```')
+    compile_case("math-cjk", 'title: "公式", toc: false',
+                 '== 中文与公式\n$ "平均值" = 1/n sum_(i=1)^n x_i $', pages=2)
     for name, inputs in (("showcase", ()), ("showcase-4x3", ("--input", "ratio=4:3"))):
         pdf = BUILD / f"{name}.pdf"
         run("typst", "compile", "--root", str(ROOT), *inputs,

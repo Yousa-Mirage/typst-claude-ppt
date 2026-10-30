@@ -24,6 +24,6 @@
   set par(leading: 0.65em, spacing: 0.8em, justify: false)
   set heading(numbering: none)
   set math.equation(numbering: none)
-  show math.equation: set text(font: "Libertinus Math")
+  show math.equation: set text(font: ("Libertinus Math", "Source Han Serif SC"))
   body
 }
