@@ -4,6 +4,10 @@ demo option="":
     typst compile --root . examples/showcase.typ examples/showcase.pdf
     @if [ {{ quote(option) }} != '--no-preview' ]; then open examples/showcase.pdf; fi
 
+# Render the Quarto example PDF without opening it.
+quarto:
+    quarto render examples/quarto.qmd
+
 # Install the current package into the @local namespace.
 install:
     typship install local
