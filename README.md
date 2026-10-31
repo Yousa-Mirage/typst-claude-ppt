@@ -1,8 +1,19 @@
 # Typst-Claude-PPT
 
-个人使用的 Claude 浅色风格 Typst 幻灯片模板，需要 Typst 0.13.0 及以上。[可查看演示 PDF](examples/showcase.pdf)。
+个人使用的 Claude 浅色风格 Typst 幻灯片模板，需要 Typst 0.13.0 及以上。[可查看完整演示 PDF](examples/showcase.pdf)。
 
 同时包含对应的 [Quarto 扩展](#在-quarto-中使用)，可以在 Quarto 中使用，将 Quarto 文稿直接渲染为使用本模板的 PDF 幻灯片。
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/cover.png" alt="封面" /></td>
+    <td width="50%"><img src="docs/cards-callout.png" alt="双栏卡片与提示框" /></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/table-equation.png" alt="表格、公式与续页标记" /></td>
+    <td width="50%"><img src="docs/code.png" alt="代码块" /></td>
+  </tr>
+</table>
 
 ## 本地使用
 
