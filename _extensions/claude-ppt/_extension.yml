@@ -8,6 +8,7 @@ contributes:
       toc: true
       footer: true
       ratio: 16/9
+      accent: true
       shift-heading-level-by: 0
       syntax-highlighting: idiomatic
       filters:

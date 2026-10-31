@@ -16,6 +16,7 @@ $endif$
   ratio: $ratio$,
   footer: $if(footer)$true$else$false$endif$,
   toc: $if(toc)$true$else$false$endif$,
+  accent: $if(accent)$true$else$false$endif$,
   doc,
 )
 

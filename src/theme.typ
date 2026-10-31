@@ -27,7 +27,12 @@
 )
 #let content-height = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
 
-#let theme(body) = {
+// Components are evaluated before slides; resolve their accent color during layout.
+#let accent-color = state("claude-ppt-accent-color", colors.accent)
+
+#let theme(body, accent: true) = {
+  let highlight = if accent { colors.accent } else { colors.ink }
+  let link-color = if accent { colors.accent.darken(20%) } else { colors.ink }
   set text(font: fonts.serif, size: 12pt, fill: colors.ink, lang: "zh", region: "CN")
   set par(leading: 0.65em, spacing: 1em, justify: false)
   show heading: set text(weight: "regular")
@@ -39,7 +44,7 @@
     indent: 0.15em,
     body-indent: 0.65em,
     spacing: 0.6em,
-    marker: depth => text(fill: colors.accent, if depth == 0 { [•] } else { [◦] }),
+    marker: depth => text(fill: highlight, if depth == 0 { [•] } else { [◦] }),
   )
   set enum(indent: 0pt, body-indent: 0.65em, spacing: 0.6em)
   set terms(spacing: 0.65em)
@@ -73,7 +78,7 @@
     width: 100%,
     fill: colors.surface,
     inset: (left: 12pt, y: 12pt),
-    stroke: (left: 2pt + colors.accent),
+    stroke: (left: 2pt + highlight),
   )[
     #set text(fill: colors.muted)
     #it
@@ -98,7 +103,7 @@
   show figure.caption: set text(font: fonts.sans, size: 9pt, fill: colors.muted)
   show link: it => {
     if type(it.dest) == str {
-      underline(stroke: 0.6pt + colors.accent.darken(20%), offset: 2pt, text(fill: colors.accent.darken(20%), it))
+      underline(stroke: 0.6pt + link-color, offset: 2pt, text(fill: link-color, it))
     } else { it }
   }
   body

@@ -70,6 +70,7 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 | `ratio` | `16/9` | 只接受 `16/9` 和 `4/3` |
 | `footer` | `true` | 控制封面之后的左侧页脚及右侧页码 |
 | `toc` | `true` | 是否生成目录 |
+| `accent` | `true` | 默认使用橙色强调色；设为 `false` 时关闭强调色 |
 
 ### 内容组件
 
@@ -135,13 +136,14 @@ quarto render slides.qmd
 
 - `title`、`subtitle`、`date` 对应模板元数据。
 - `#` 开始章节页，`##` 开始内容页。编号、目录和续页标记沿用 Typst 模板的规则。
-- 默认 `ratio: 16/9`、`toc: true`、`footer: true`。可以在格式配置中覆盖：
+- 默认 `ratio: 16/9`、`toc: true`、`footer: true`、`accent: true`。可以在格式配置中覆盖：
   ```yaml
   format:
     claude-ppt-typst:
       ratio: 4/3
       toc: false
       footer: false
+      accent: false
   ```
 - 原生参考文献处理会将参考文献放在单独的内容页，可用 `reference-section-title` 修改标题。示例文稿展示了 `bibliography` 与 `[@typst-docs]` 引用的写法。
 

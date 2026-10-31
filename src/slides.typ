@@ -1,5 +1,5 @@
 #import "@preview/numbly:0.1.0": numbly
-#import "theme.typ": colors, dimensions, fonts, theme
+#import "theme.typ": accent-color, colors, dimensions, fonts, theme
 
 #let section-heading = heading.where(level: 1)
 #let content-heading = heading.where(level: 2)
@@ -89,11 +89,11 @@
   }
 }
 
-#let cover(title, subtitle, authors, date) = {
+#let cover(title, subtitle, authors, date, highlight) = {
   set page(header: none, footer: none, margin: (..dimensions.margin, top: dimensions.cover-top))
   block(height: 100%, width: 100%, breakable: false)[
     #v(1fr)
-    #line(length: 22pt, stroke: 2pt + colors.accent)
+    #line(length: 22pt, stroke: 2pt + highlight)
     #v(12pt)
     #block(width: 100%)[
       #set par(leading: 0.28em)
@@ -116,7 +116,7 @@
   ]
 }
 
-#let section-slide(it) = {
+#let section-slide(it, highlight) = {
   pagebreak(weak: true)
   set page(header: none)
   block(height: 100%, width: 100%, breakable: false)[
@@ -124,7 +124,7 @@
     #set par(leading: 0.3em)
     #text(size: 27pt, weight: "regular", numbered-title(it))
     #v(14pt)
-    #line(length: 22pt, stroke: 2pt + colors.accent)
+    #line(length: 22pt, stroke: 2pt + highlight)
     #v(1fr)
   ]
   pagebreak(weak: true)
@@ -161,10 +161,13 @@
   ratio: 16 / 9,
   footer: true,
   toc: true,
+  accent: true,
 ) = {
   assert(title != none and plain(title).trim() != "", message: "title must be non-empty text or content")
   assert(ratio in (16 / 9, 4 / 3), message: "ratio must be 16/9 or 4/3")
   assert(type(footer) == bool and type(toc) == bool, message: "footer and toc must be booleans")
+  assert(type(accent) == bool, message: "accent must be a boolean")
+  let highlight = if accent { colors.accent } else { colors.ink }
   let authors = if authors == none { () } else if type(authors) == str { (authors,) } else { authors }
   assert(type(authors) == array, message: "authors must be a string or an array of strings")
   assert(authors.all(it => type(it) == str), message: "authors must contain only strings")
@@ -172,7 +175,7 @@
   let displayed-date = if type(date) == datetime { date.display("[year]-[month]-[day]") } else { date }
 
   set document(title: title, author: authors, date: if type(date) == datetime { date } else { none })
-  show: theme
+  show: theme.with(accent: accent)
   show: body => context {
     let has-sections = query(section-heading).len() > 0
     set heading(numbering: numbly(
@@ -197,7 +200,7 @@
     footer-descent: dimensions.footer-descent,
     numbering: none,
   )
-  show section-heading: section-slide
+  show section-heading: it => section-slide(it, highlight)
   show content-heading: {
     pagebreak(weak: true)
     // Give even an intentionally empty slide a page before the next heading.
@@ -208,7 +211,8 @@
   // Bibliographies use content-slide headings and never advance heading numbers.
   show bibliography: set heading(offset: 1, numbering: none, outlined: false)
 
-  cover(title, subtitle, authors, displayed-date)
+  accent-color.update(highlight)
+  cover(title, subtitle, authors, displayed-date, highlight)
   pagebreak(weak: true)
   if toc { contents() }
   body

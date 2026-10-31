@@ -1,4 +1,4 @@
-#import "theme.typ": colors, content-height, fonts
+#import "theme.typ": accent-color, colors, content-height, fonts
 
 // A panel may move to the next page, but must fit on a whole content page.
 #let panel(body, fill: colors.raised, stroke: 0.5pt + colors.border, inset: 12pt, radius: 7pt) = layout(size => {
@@ -17,9 +17,9 @@
   #body
 ]
 
-#let callout(body, title: none) = panel(
+#let callout(body, title: none) = context panel(
   fill: colors.surface,
-  stroke: (left: 2pt + colors.accent),
+  stroke: (left: 2pt + accent-color.get()),
   radius: 3pt,
 )[
   #if title != none {
