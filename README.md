@@ -17,7 +17,7 @@
 
 ## 本地使用
 
-目前没有发布到 Typst Universe 的计划。推荐使用 [`typship`](https://github.com/sjfhsjfh/typship) 从 GitHub 下载安装包。
+目前没有发布到 Typst Universe 的计划。推荐使用 [`typship`](https://github.com/sjfhsjfh/typship) 从 GitHub 安装到本地使用。
 
 ```sh
 typship download https://github.com/yousa-mirage/typst-claude-ppt
