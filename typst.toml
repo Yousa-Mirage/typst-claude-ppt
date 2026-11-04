@@ -17,6 +17,7 @@ exclude = [
   ".quarto", ".quarto/**",
   "docs", "docs/**",
   "examples", "examples/**",
+  "fonts", "fonts/**",
   "_quarto.yml",
   "justfile",
 ]

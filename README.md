@@ -29,7 +29,7 @@ typship download https://github.com/yousa-mirage/typst-claude-ppt
 #import "@local/typst-claude-ppt:0.1.0": *
 ```
 
-同时还需要安装一些字体，包括 Anthropic 系列和思源系列。具体如下，字体可从网络自行获取。
+同时还需要安装一些字体，包括 [Anthropic 系列](fonts/)和思源系列（[思源宋体](https://github.com/adobe-fonts/source-han-serif/releases/download/2.003R/09_SourceHanSerifSC.zip)、[思源黑体](https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/09_SourceHanSansSC.zip)）。具体如下：
 
 | 用途 | 字体链 |
 | --- | --- |
